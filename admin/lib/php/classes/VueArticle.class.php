@@ -28,17 +28,16 @@ class VueArticle{
         return $data;
     }
     
-    /*public function getVue_gateauById($id){
+    public function readArticle($idArticle){
         try{
-           $query = "SELECT * FROM vue_gateaux WHERE id_gt_gateau=:gt_id_gateau";
+           $query = "SELECT * FROM vue_articles WHERE id_article=:idArticle ";
            $resultset = $this->_db->prepare($query);
-           $resultset->bindValue(1,$id);
+           $resultset->bindValue(1,$idArticle);
            $resultset->execute();
            $data=$resultset->fetchAll();
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }
-        
         return $data;
-    }*/
+    }
 }

@@ -37,11 +37,11 @@
                     for($i=0;$i<$nbr;$i++){ ?>
                         <div class="no-deco">
                             <li>
-                                <?php 
+                                <?php
                                     /* Menu dynamique avec envoie de l'id de la catégorie à la page articles.php */
-                                    $lien= $_SESSION['type_article']=$liste_type[$i]->id_categorie;
-                                    $intitule = utf8_encode($liste_type[$i]->intitule);
                                     $pageLink='./index.php?page=articles';
+                                    $lien=$liste_type[$i]->id_categorie;
+                                    $intitule = utf8_encode($liste_type[$i]->intitule);
                                     echo "<a href='$pageLink&link=".$lien."'>$intitule</a>";
                                 ?>
                             </li>

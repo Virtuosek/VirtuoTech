@@ -8,7 +8,7 @@ if(isset($_SESSION['client'])){
         ?>
         <!-- Panier vide :-->
         <div class='bottom background2'>
-            <h3 class="font-bold mrg-top-30">C'est vide içi.<br/>
+            <h3 class="font-bold mrg-top-30">C'est par vide içi.<br/>
             <a href="./index.php?page=articles">Acheter</a> un article ?<br/>
             <a href="./index.php?page=monpanier">Gérer</a> votre panier ?</h3>
         </div>

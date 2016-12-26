@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+    ob_start(); // Permet l'actualisation de certaines pages
     include ('./admin/lib/php/adm_liste_include.php');
     $cnx=Connexion::getInstance($dsn, $user, $password);
     session_start();

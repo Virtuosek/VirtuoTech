@@ -5,7 +5,6 @@
 <div class="bottom background">
     
 <?php
-    
    if(isset($_POST['submit_register'])){
         $log=new Register($cnx);
         $retour=null;
@@ -30,11 +29,11 @@
             }
         }else{
             ?>
-                <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    Veuillez remplir tous les champs.
-                </div>
-                <?php
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Veuillez remplir tous les champs.
+            </div>
+            <?php
         }
     }
 ?>

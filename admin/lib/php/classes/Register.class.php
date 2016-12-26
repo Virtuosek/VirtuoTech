@@ -25,5 +25,4 @@ class Register{
         }
         return $retour;
     }
-    
 }
