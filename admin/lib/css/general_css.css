@@ -104,6 +104,10 @@
     width:200px;
     height:200px;
 }
+.img_200x200{
+    width:20%;
+    height:20%;
+}
 /**/
 
 /* margins */
@@ -140,6 +144,9 @@
 }
 .mrg-left{
     margin-left:10px;
+}
+.mrg-left20px{
+    margin-left:20px;
 }
 /**/
 

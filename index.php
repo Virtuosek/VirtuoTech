@@ -13,6 +13,9 @@
     <script src="./admin/lib/js/jquery.js"></script>
     <script src="./admin/lib/js/bootstrap.min.js"></script>
     <script src="./admin/lib/js/personal_js.js"></script>
+    <script src="./admin/lib/js/functionsJqueryAdmin.js.js"></script>
+    <script src="./admin/lib/js/functionsJqueryVal.js.js"></script>
+    <script src="./admin/lib/js/messagesJqueryVal.js.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
     <title>VirtuoTech</title>
 </head>

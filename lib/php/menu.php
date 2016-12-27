@@ -58,15 +58,15 @@
             <?php if(!isset($_SESSION['client'])){?>
             <form action="<?php print $_SERVER['PHP_SELF']; ?>" method='post' id="form_auth_" class=" navbar-form navbar-right">
                 <div class="row">
-                    <div class="input-group col-lg-4 col-md-3 col-xs-5">
+                    <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="login_" class="form-control" type="text" name="login" placeholder="Pseudo">                      
                     </div>
-                    <div class="input-group col-lg-4 col-md-3 col-xs-5">
+                    <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="password_" class="form-control" type="password"  name="password" placeholder="Mot de passe">                                        
                     </div>
-                    <input type="submit" class="btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
+                    <input type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
                     <a type="button" class="btn btn-info" href="./index.php?page=inscription">Inscription</a>
                 </div>
             </form>

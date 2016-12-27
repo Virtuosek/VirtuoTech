@@ -8,7 +8,7 @@ if(isset($_SESSION['client'])){
         ?>
         <!-- Aucune commande n'est effectuée : -->
         <div class='bottom background2'>
-            <h3 class="font-bold mrg-top-30">C'est par vide içi.<br/>
+            <h3 class="font-bold mrg-top-30">C'est vide par içi.<br/>
             <a href="./index.php?page=articles">Acheter</a> un article ?<br/>
             <a href="./index.php?page=monpanier">Gérer</a> votre panier ?</h3>
         </div>
@@ -25,7 +25,7 @@ if(isset($_SESSION['client'])){
             <br/><br/>
             <div class="container">
                 <div class="featurette">
-                <img src="./admin/images/<?php print $article['image']; ?>" class="featurette-image img-responsive pull-left px_200x200">
+                <img src="./admin/images/<?php print $article['image']; ?>" class="featurette-image img-responsive pull-left img_200x200">
                 <h4><?php print utf8_encode($article['nom']."<br/>"); ?></h3>
                 <div class="red"><?php print $article['prix']."&euro;<br/>"?></div>
                 <h4> Etat : </h4>

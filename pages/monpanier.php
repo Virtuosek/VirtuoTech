@@ -123,20 +123,20 @@ if(isset($_SESSION['client'])){
                 <br/><br/>
                 <div class="container">
                     <div class="featurette">
-                        <img src="./admin/images/<?php print $liste_a[$j]['image']; ?>"  class="featurette-image img-responsive pull-left px_200x200">
+                        <img src="./admin/images/<?php print $liste_a[$j]['image']; ?>"  class="featurette-image img-responsive pull-left img_200x200">
                         <h3><?php print utf8_encode($liste_a[$j]['nom']."<br/>"); ?></h3>
                         <div class="red"><?php print $liste_a[$j]['prix']."&euro;<br/>"?></div>
                         <?php print utf8_encode($liste_a[$j]['description']);?>
                         <br/><br/>
                         <form method="post">
                             <div class="row">
-                                <div class="input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                                <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
                                     <?php $id=$liste_g[$i]['id_panier'];?>
                                     <button type="submit" id="id<?php print $i; ?>" name="id<?php print $id; ?>" 
                                             class='form-control btn btn-danger btn-sm col-md-4 col-lg-4'>Supprimer</button>
                                 </div>
-                                <div class="input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                                <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
                                     <?php $id=$liste_g[$i]['id_article'];?>
                                    <button type="submit" id="cm<?php print $i; ?>" name="cm<?php print $id; ?>"
