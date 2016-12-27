@@ -98,7 +98,7 @@
 }
 .px_150x150{
     width:150px;
-    height:150px;
+    height:150px;   
 }
 .px_200x200{
     width:200px;
@@ -207,6 +207,16 @@ label{
     margin: 0 auto;
     max-width: 330px;
     padding: 40px 40px;
+}
+/**/
+
+/* historique.php */
+.case_green{
+    color:green;
+}
+.case_blue{
+    color:blue;
+    font-style: italic;
 }
 /**/
 

@@ -50,3 +50,7 @@ $(document).ready(function() {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
+
+function init() { 
+  document.getElementById("about").style.color = 'green';
+}

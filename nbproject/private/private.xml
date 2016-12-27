@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/karim/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/admin/lib/css/general_css.css</file>
-            <file>file:/C:/Users/karim/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/pages/articles.php</file>
-            <file>file:/C:/Users/karim/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/index.php</file>
-            <file>file:/C:/Users/karim/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/lib/php/menu.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/lib/php/menu.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/admin/lib/php/classes/VueHistorique.class.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/admin/lib/js/personal_js.js</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/pages/historique.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/pages/monpanier.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/admin/lib/php/classes/VueCommande.class.php</file>
+            <file>file:/C:/Users/Virtuosek/Dropbox/PHP/Project%20VirtuoTech/VirtuoTech/admin/lib/php/classes/VuePanier.class.php</file>
         </group>
     </open-files>
 </project-private>

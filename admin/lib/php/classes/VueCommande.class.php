@@ -11,7 +11,8 @@ class VueCommande {
         
     /* Create : */
     public function addCommande($idClient,$idArticle,$quantite,$date){
-        $retour=array();
+        //$retour=array();
+        $retour=null;
         try{
             $query="SELECT create_commande(:idArticle,:idClient,:quantite,:date) as retour";
             $sql=$this->_db->prepare($query);
@@ -25,5 +26,19 @@ class VueCommande {
             print $ex->getMessage();
         }
         return $retour;
+    }
+    
+    /* ReadAll(idClient)*/
+     public function getListeCommande($idClient){
+        try{
+           $query = "SELECT * FROM commande WHERE id_client=:id ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idClient);
+           $resultset->execute();
+           $data=$resultset->fetchAll();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
     }
 }

@@ -15,6 +15,7 @@ class VueArticle{
         $this->_db=$cnx;
     }
     
+    /* ReadAll (idCategorie) : */
     public function getListeArticle($id){
         try{
            $query = "SELECT * FROM vue_articles WHERE id_categorie=:id ";
@@ -28,6 +29,7 @@ class VueArticle{
         return $data;
     }
     
+    /* Read (idArticle)  wrong function*/
     public function readArticle($idArticle){
         try{
            $query = "SELECT * FROM vue_articles WHERE id_article=:idArticle ";
@@ -35,6 +37,20 @@ class VueArticle{
            $resultset->bindValue(1,$idArticle);
            $resultset->execute();
            $data=$resultset->fetchAll();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
+    /* Read (idArticle) : */
+    public function readArticle2($idArticle){
+        try{
+           $query = "SELECT * FROM vue_articles WHERE id_article=:idArticle ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idArticle);
+           $resultset->execute();
+           $data=$resultset->fetch();
         } catch (PDOException $ex) {
             print $ex->getMessage();
         }

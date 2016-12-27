@@ -12,21 +12,23 @@
     }
 
     /* Ajout des articles souhaités à la table Panier : */
-    for($i=0;$i<999;$i++){
-        if(isset($_POST['id'.$i])){
-            $log=new VuePanier($cnx);
-            // Eventually : MAJ de la quantité d'un article ajouté au panier.
-            $idClient = $_SESSION['client'];
-            $idArticle = $i;
-            $retour=$log->addToCart($idClient,$idArticle);
-            if($retour==0){
-                /* Exception handling : cas où l'ajout n'a pas été effectué : */
-                ?>
-                <div class="alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    L'ajout de l'article à votre panier n'a pas été effectué
-                </div>
-                <?php
+    if(isset($_SESSION['client'])){
+        for($i=0;$i<999;$i++){
+            if(isset($_POST['id'.$i])){
+                $log=new VuePanier($cnx);
+                // Eventually : MAJ de la quantité d'un article ajouté au panier.
+                $idClient = $_SESSION['client'];
+                $idArticle = $i;
+                $retour=$log->addToCart($idClient,$idArticle);
+                if($retour==0){
+                    /* Exception handling : cas où l'ajout n'a pas été effectué : */
+                    ?>
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        L'ajout de l'article à votre panier n'a pas été effectué
+                    </div>
+                    <?php
+                }
             }
         }
     }
