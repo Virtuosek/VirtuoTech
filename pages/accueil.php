@@ -3,8 +3,8 @@
     <hr class="featurette-divider"> <!-- divides the header from the rest-->
 <!--Featurette &-->
     <div class="featurette">
-        <img class="featurette-image img-circle img-responsive pull-right" src="./admin/images/img1.jpg">
-        <h2 class="featurette-heading">Une gamme de produits 
+        <img class="featurette-image img-responsive pull-right img_350x350" src="./admin/images/img1.jpg">
+        <h2 class="featurette-heading">Une gamme de produits <br>
             <span class="text-muted small">Entre vos mains</span>
         </h2>
         <p class="lead">Choisissez parmi une multitude de gadgets High-Tech.
@@ -15,8 +15,8 @@
     <hr class="featurette-divider">
 <!--Featurette 2-->
     <div class="featurette">
-        <img class="featurette-image img-circle img-responsive pull-left" src="./admin/images/img2.jpg.">
-        <h2 class="featurette-heading">Un article vous plaît ?
+        <img class="featurette-image img-circle img-responsive pull-left img_350x350" src="./admin/images/img2.jpg.">
+        <h2 class="featurette-heading">Un article vous plaît ? <br>
             <span class="text-muted small">Ajoutez le à votre panier</span>
         </h2>
         <p class="lead">Besoin de réfléchir avant d'acheter un article ? 
@@ -28,8 +28,8 @@
     <hr class="featurette-divider">
 <!--Featurette 3-->
     <div class="featurette">
-        <img class="featurette-image img-circle img-responsive pull-right" src="./admin/images/img3.jpg.">
-        <h2 class="featurette-heading">Une question ?
+        <img class="featurette-image img-circle img-responsive pull-right img_350x350" src="./admin/images/img3.jpg.">
+        <h2 class="featurette-heading">Une question ? <br>
             <span class="text-muted small">Retrouvez-nous dans les réseaux sociaux</span>
         </h2>
         <p class="lead">Un article que vous cherchez est introuvable ? Un problème est survenu lors d'un achat ?
@@ -37,5 +37,5 @@
             Retrouvez-nous sur les réseaux sociaux Twitter, Facebook, Google+, Youtube...
             Ou bien envoyer un mail au responsable via l'adresse mail remagkes@gmail.com</p>
     </div>
-    <hr class="featurette-divider">
+    <hr class="featurette-divider mr-bot">
 </div>

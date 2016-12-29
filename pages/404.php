@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="../admin/lib/css/general_css.css">
 
-<div class="bottom background">
-    <div class="mr-bot"></div>
+<div class="bottom background margin-top">
     <div class="error-code">404 <i class="fa fa-warning"></i></div>
     <h3 class="font-bold">Désolé, la page que vous demandez est introuvable.</h3>
     <div class="error-desc">

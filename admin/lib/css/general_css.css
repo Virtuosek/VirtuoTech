@@ -23,6 +23,14 @@
     margin-top:-10px;
 }
 
+.background3{
+    background: url("../..//images/wallpaper2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .ct-container{
     display: inline-block;
     position:absolute;
@@ -88,25 +96,21 @@
 /**/
 
 /* images */
-.img_250x250{
-    width:25%;
-    height:25%;
-}
 .img_115x115{
     width:115px;
     height:115px;
 }
-.px_150x150{
-    width:150px;
-    height:150px;   
-}
-.px_200x200{
-    width:200px;
-    height:200px;
-}
 .img_200x200{
     width:20%;
     height:20%;
+}
+.img_250x250{
+    width:25%;
+    height:25%;
+}
+.img_350x350{
+    width:35%;
+    height:35%;
 }
 /**/
 
@@ -156,7 +160,7 @@
 }
 
 .featurette {
-    overflow: hidden;
+    overflow: auto;
 }
 
 .featurette-image.pull-left {
@@ -227,6 +231,31 @@ label{
 }
 /**/
 
+/* clients_admin.php */
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+/**/
 
 /* mediaqueries tout-en-un */
 @media (min-width: 768px) and (max-width: 991px) {

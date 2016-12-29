@@ -9,25 +9,11 @@
 class VueArticle{
     
     private $_db;
-    private $_articleArray=array();
     
     public function __construct($cnx){ 
         $this->_db=$cnx;
     }
     
-    /* ReadAll (idCategorie) : */
-    public function getListeArticle($id){
-        try{
-           $query = "SELECT * FROM vue_articles WHERE id_categorie=:id ";
-           $resultset = $this->_db->prepare($query);
-           $resultset->bindValue(1,$id);
-           $resultset->execute();
-           $data=$resultset->fetchAll();
-        } catch (PDOException $ex) {
-            print $ex->getMessage();
-        }
-        return $data;
-    }
     
     /* Read (idArticle)  wrong function*/
     public function readArticle($idArticle){
@@ -56,4 +42,47 @@ class VueArticle{
         }
         return $data;
     }
+    
+    /* ReadAll : */
+    public function readAll(){
+        try{
+           $query = "SELECT * FROM article ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->execute();
+           $data=$resultset->fetchAll();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
+    
+    /* ReadAll (idCategorie) : */
+    public function getListeArticle($id){
+        try{
+           $query = "SELECT * FROM vue_articles WHERE id_categorie=:id ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$id);
+           $resultset->execute();
+           $data=$resultset->fetchAll();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
+    /* Delete (idArticle)*/
+    public function deleteArticle($idArticle){
+        try{
+           $query = "SELECT * FROM del_article WHERE id_article=:id ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idArticle);
+           $resultset->execute();
+           $data=$resultset->fetchAll();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
 }

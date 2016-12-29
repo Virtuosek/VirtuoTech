@@ -4,11 +4,13 @@
 <div class="bottom background">
 <?php
    if(isset($_POST['submit_register'])){
-        $log=new Register($cnx);
+        $ObjClient=new DAOClient($cnx);
         $retour=null;
         /* NYI : Controle de saisie */
         if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
-            $retour=$log->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email']);
+            
+            /* Le type par défaut de l'utilisateur est 1 = client, qui est enregistré dans la fonction create_client */
+            $retour=$ObjClient->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email']);
             if($retour==1){
                 ?>
                 <div class="alert alert-success alert-dismissable fade in">

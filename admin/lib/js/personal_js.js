@@ -50,3 +50,67 @@ $(document).ready(function() {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
+
+/* clients_admin.php*/
+
+$(document).ready(function(){
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+
+    $('.filterable .filters input').keyup(function(e){
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        $table.find('tbody .no-result').remove();
+        
+        $rows.show();
+        $filteredRows.hide();
+        
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Aucun résultat</td></tr>'));
+        }
+    });
+});
+
+$(document).ready(function(){
+    var i=0;
+    $("#add_row").click(function(){
+        $('#addr'+i).html("<td>"+ (i) +
+        "</td><td><input name='nom"+i+"' type='text' placeholder='Nom' class='form-control input-md'  />\n\</td><td>\n\
+        <input  name='mail"+i+"' type='text' placeholder='Description'  class='form-control input-md'></td><td>\n\
+        <input  name='mobile"+i+"' type='text' placeholder='Image'  class='form-control input-md'></td><td>\n\
+        <input  name='mobile"+i+"' type='text' placeholder='Prix'  class='form-control input-md'></td><td>\n\
+        <input  name='mobile"+i+"' type='text' placeholder='Catégorie' class='form-control input-md'></td>");
+        $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+        i++; 
+    });
+    $("#delete_row").click(function(){
+        if(i>1){
+            $("#addr"+(i-1)).html('');
+            i--;
+        }
+    });
+
+});

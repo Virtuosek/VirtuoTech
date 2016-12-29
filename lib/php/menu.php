@@ -1,22 +1,37 @@
 <?php
+
     $type=new Type_articleDB($cnx);
     $liste_type=$type->getType_article();
     $nbr=count($liste_type);
+    
     if(isset($_POST['submit_login'])){
-        $log=new AdminBD($cnx);
-        $retour=$log->isAuthorized($_POST['login'],$_POST['password']);
+        
+        $ObjAdmin=new AdminBD($cnx);
+        $retour=$ObjAdmin->isAuthorized($_POST['login'],$_POST['password']);
+        
         if($retour!=0){
-            $_SESSION['client']=$retour; // récupération de l'id du client connecté
+            
+            $ObjClient=new DAOClient($cnx);
+            $User=$ObjClient->readInfoClient($_POST['login'],$_POST['password']);
+            
+            if($User['type_client']==1){
+                 $_SESSION['client']=$retour;
+            }
+            else{
+                $_SESSION['admin']=$retour;
+            }
         }
         else{
             //exception handling
             $message="Données incorrectes";
         }
+        /* Actualisation de la page pour remarquer le changement : */
+        header("Refresh:0");
     }
 ?>
 <link href='../admin/lib/css/general_css.css' type='text/css'/>
 
-<nav class="navbar navbar-inverse mrg-top">
+<nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -55,7 +70,7 @@
             <li><a href="./index.php?page=historique">Historique</a></li> 
             <li><a data-toggle="modal" data-target="#contact" data-original-title>Contact</a></li>
         <!-- Form de Login -->
-            <?php if(!isset($_SESSION['client'])){?>
+            <?php if(!isset($_SESSION['client']) && !isset($_SESSION['admin'])){?>
             <form action="<?php print $_SERVER['PHP_SELF']; ?>" method='post' id="form_auth_" class=" navbar-form navbar-right">
                 <div class="row">
                     <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">

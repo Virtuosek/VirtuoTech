@@ -3,7 +3,6 @@
 class VuePanier{
     
     private $_db;
-    private $_articleArray=array();
     
     public function __construct($cnx){ 
         $this->_db=$cnx;
