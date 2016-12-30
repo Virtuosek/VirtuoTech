@@ -14,6 +14,24 @@ class VueArticle{
         $this->_db=$cnx;
     }
     
+    /* Create : */
+    public function create_article($nom,$description,$image,$categorie,$prix){
+        $retour=array();
+        try{
+            $query="SELECT create_article(:nom,:description,:image,:categorie,:prix) as retour";
+            $sql=$this->_db->prepare($query);
+            $sql->bindValue(':nom',$nom);
+            $sql->bindValue(':description',$description);
+            $sql->bindValue(':image',$image);
+            $sql->bindValue(':categorie',$categorie);
+            $sql->bindValue(':prix',$prix);
+            $sql->execute();
+            $retour=$sql->fetchColumn(0);
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $retour;
+    }
     
     /* Read (idArticle)  wrong function*/
     public function readArticle($idArticle){
@@ -46,7 +64,7 @@ class VueArticle{
     /* ReadAll : */
     public function readAll(){
         try{
-           $query = "SELECT * FROM article ";
+           $query = "SELECT * FROM article ORDER BY id_article";
            $resultset = $this->_db->prepare($query);
            $resultset->execute();
            $data=$resultset->fetchAll();
@@ -55,7 +73,6 @@ class VueArticle{
         }
         return $data;
     }
-    
     
     /* ReadAll (idCategorie) : */
     public function getListeArticle($id){
@@ -74,15 +91,21 @@ class VueArticle{
     /* Delete (idArticle)*/
     public function deleteArticle($idArticle){
         try{
-           $query = "SELECT * FROM del_article WHERE id_article=:id ";
-           $resultset = $this->_db->prepare($query);
-           $resultset->bindValue(1,$idArticle);
-           $resultset->execute();
-           $data=$resultset->fetchAll();
+            $query = "SELECT del_article(:idArticle) as retour ";
+            $sql=$this->_db->prepare($query);
+            $sql->bindValue(':idArticle',$idArticle);
+            $sql->execute();
+            $retour=$sql->fetchColumn(0);
         } catch (PDOException $ex) {
-            print $ex->getMessage();
+            ?>
+            <span class="margin-center"></span>
+            <div class="centrer alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                L'article n'a pas été supprimé ! Il se peut qu'un client ait commandé ou ajouté cet article à son panier.
+            </div>
+            <?php
         }
-        return $data;
+        return $retour;
     }
     
 }

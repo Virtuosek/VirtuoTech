@@ -4,6 +4,7 @@
     include ('./admin/lib/php/adm_liste_include.php');
     $cnx=Connexion::getInstance($dsn, $user, $password);
     session_start();    
+    error_reporting(0); // Supprimer les alertes/notices... de PHP
 ?>
 <html>
 <head>

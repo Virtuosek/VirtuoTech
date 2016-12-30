@@ -8,6 +8,7 @@ class Register{
        $this->_db=$db;
     }
     
+    /* Create : */
     public function create_client($nom,$prenom,$pseudo,$mdp,$email){
         $retour=array();
         try{

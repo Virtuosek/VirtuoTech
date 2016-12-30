@@ -7,6 +7,7 @@ window.cookieconsent_options = {
     "link":null,
     "theme":"dark-bottom"
 };
+/**/
 
 /* Toutes les pages : */
 $(document).ready(function(){
@@ -26,6 +27,7 @@ $(document).ready(function(){
     });
     $('#back-to-top').tooltip('show');
 });
+/**/
  
  /* contact.php*/
 $(document).ready(function() {
@@ -45,14 +47,15 @@ $(document).ready(function() {
         })
     });
 });
+/**/
 
 /* articles.php */
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
+/**/
 
 /* clients_admin.php*/
-
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
@@ -92,25 +95,4 @@ $(document).ready(function(){
             $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Aucun résultat</td></tr>'));
         }
     });
-});
-
-$(document).ready(function(){
-    var i=0;
-    $("#add_row").click(function(){
-        $('#addr'+i).html("<td>"+ (i) +
-        "</td><td><input name='nom"+i+"' type='text' placeholder='Nom' class='form-control input-md'  />\n\</td><td>\n\
-        <input  name='mail"+i+"' type='text' placeholder='Description'  class='form-control input-md'></td><td>\n\
-        <input  name='mobile"+i+"' type='text' placeholder='Image'  class='form-control input-md'></td><td>\n\
-        <input  name='mobile"+i+"' type='text' placeholder='Prix'  class='form-control input-md'></td><td>\n\
-        <input  name='mobile"+i+"' type='text' placeholder='Catégorie' class='form-control input-md'></td>");
-        $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-        i++; 
-    });
-    $("#delete_row").click(function(){
-        if(i>1){
-            $("#addr"+(i-1)).html('');
-            i--;
-        }
-    });
-
 });
