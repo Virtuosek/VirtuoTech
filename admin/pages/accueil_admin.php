@@ -1,8 +1,6 @@
 
 <div class="container">
-    
     <hr class="featurette-divider">
-
     <div class="featurette">
         <img class="featurette-image img-responsive pull-right img_350x350" src="./admin/images/users.png">
         <h2 class="featurette-heading">Gestion des clients <br>
@@ -16,7 +14,6 @@
     </div>
     
     <hr class="featurette-divider">
-
     <div class="featurette">
         <img class="featurette-image img-circle img-responsive pull-left img_350x350" src="./admin/images/database.png">
         <h2 class="featurette-heading">Gestion des articles<br>
@@ -30,7 +27,6 @@
     </div>
     
    <hr class="featurette-divider">
-
     <div class="featurette">
         <img class="featurette-image img-circle img-responsive pull-right img_350x350" src="./admin/images/server.jpg.">
         <h2 class="featurette-heading">Gestion des catégories<br>
@@ -42,8 +38,8 @@
             Attention la suppression d'une catégorie engendre automatiquement la suppression de tous les articles lui appartenant.
         </p>
     </div>
+   
     <hr class="featurette-divider mr-bot">
-    
     <div class="featurette">
         <img class="featurette-image img-circle img-responsive pull-left img_350x350" src="./admin/images/shipping.jpg">
         <h2 class="featurette-heading">Gestion des commandes<br>
@@ -53,5 +49,4 @@
             Et pour finir, la gestion des commandes, qui vous permet de voir la liste des commandes, modifier l'état ou la supprimer.
         </p>
     </div>
-    
 </div>

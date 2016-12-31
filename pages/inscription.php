@@ -10,10 +10,10 @@
         $ObjClient=new DAOClient($cnx);
         $retour=null;
         /* NYI : Controle de saisie */
-        if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
+        //if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
             
-            /* Le type par défaut de l'utilisateur est 1 = client, qui est enregistré dans la fonction create_client */
-            $retour=$ObjClient->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email']);
+            /* Le type par défaut de l'utilisateur est 1 : client */
+            $retour=$ObjClient->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email'],1);
             if($retour==1){
                 ?>
                 <div class="alert alert-success alert-dismissable fade in">
@@ -30,17 +30,17 @@
                 </div>
                 <?php
             }
-        }else{
+        /*}else{
             ?>
             <div class="alert alert-danger alert-dismissable fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Veuillez remplir tous les champs.
             </div>
             <?php
-        }
+        }*/
     }
 ?>
-<form action="index.php?page=inscription" method="post" id="form_auth_2_">
+<form action="index.php?page=inscription" method="post" id="register">
     <div class="row mrg-top">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
@@ -82,13 +82,13 @@
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
             <div class="input-group ">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
-                <input type="password" class="form-control" name="mdp" id="mdp"  placeholder="Mot de passe"/>
+                <input type="password" class="form-control" name="mdp" id="password"  placeholder="Mot de passe"/>
             </div>
         </div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
             <div class="input-group ">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
-                <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirmez Mot de passe"/>
+                <input type="password" class="form-control" name="confmdp" id="vpassword"  placeholder="Confirmez Mot de passe"/>
             </div>
         </div>
     </div>

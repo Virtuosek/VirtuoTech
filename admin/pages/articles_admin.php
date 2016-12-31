@@ -1,7 +1,6 @@
 
 <div class="background3">
-<div class="container mrg-bot-50">
-
+<div class="container">
 <?php
 
     $ObjArticle = new VueArticle($cnx);
@@ -79,8 +78,7 @@
             alert("alert-danger","Veuillez remplir tous les champs.");
     }
     
-/* Update : */
-    $idUp = 0;
+/* Update (Form) : */
     for($i=0;$i<999;$i++){
         if(isset($_POST['up'.$i])){
             /* Comme pour la création, créer une ligne comprenant les infos de l'article sélectionné : */
@@ -90,6 +88,7 @@
             <span class="margin-center"></span>
             <table class="container">
                 <form method="get">
+                    <td><input readonly name='idUp' type='text' value="<?php print utf8_encode($articleUp['id_article']);?>" class='form-control'></td>
                     <td><input  name='nomUp' type='text' value="<?php print utf8_encode($articleUp['nom']); ?>" class='form-control'></td>
                     <td><input  name='descriptionUp' type='text'value="<?php print utf8_encode($articleUp['description']); ?>" class='form-control'></td>
                     <td><input  name='imageUp' type='text' value="<?php print utf8_encode($articleUp['image']); ?>"  class='form-control'></td>
@@ -118,43 +117,35 @@
         }
     }
     
+/* Update (DB) : */
     if(isset($_GET['updateA'])){
         
-        print 'begining update : ';
+        $idArt = $_GET['idUp'];
         $nomUp = $_GET['nomUp'];
         $descriUp = $_GET['descriptionUp'];
         $imageUp = $_GET['imageUp'];
         $prixUp = $_GET['prixUp'];
-        
+
         if(!empty($nomUp) && !empty($descriUp) && !empty($imageUp) && !empty($prixUp)){
-            
-            
-            $listeAr = $ObjArticle->readAll();
-            for($a=0;$a<count($listeAr);$a++){
-                if($listeAr[$a]['nom']==$nomUp)
-                    $idArticleUp = $listeAr[$a]['id_article'];
-            }
-            print 'ID de article : '.$idArticleUp;
             $catUp=0;
             $idCatUp=0;
-            foreach ($_GET['Cats'] as $idCat) {
+
+            foreach ($_GET['Cats'] as $idCat)
                 $catUp=$idCat;
-                
-            }
-            print 'cat choisie : '.$idCat;
-            /* Récupérer l'id de la catégorie sélectionné : */
-            for($w=0;$w<$nbrCat;$w++){
-                if($listeCat[$w]['intitule']==$catUp);
+
+            /* $idCat change entre String et int : */
+            for($w=0;$w<$nbrCat;$w++)
+                if($listeCat[$w]['intitule']==$catUp || $listeCat[$w]['id_categorie']==$catUp)
                     $idCatUp = $listeCat[$w]['id_categorie'];
-            }
-            /* MAJ de l'article : */
-            print ' modification  : nom : '.$nomUp.' descr : '.$descriUp.' cat id : '.$catUp.' prix : '.$prixUp;
-            $updatedArticle = $ObjArticle->updateArticle($idArticleUp, $nomUp, $descriUp, $imageUp, $catUp, $prixUp);
-            if($updatedArticle!=0){
+
+            $updatedArticle = $ObjArticle->updateArticle($idArt, $nomUp, $descriUp, $imageUp, $idCatUp, $prixUp);
+
+            if($updatedArticle!=0 && $idArt!=0){
                 alert("alert-success","L'article <?php print $nomUp ?> a été modifié.");
             }
-        }else
-            alert("alert-danger","Veuillez remplir tous les champs.");
+            else
+                alert("alert-danger","Veuillez remplir tous les champs.");
+        }
     }
     
 /* Delete (DB)  : */
@@ -203,10 +194,11 @@
                         <td><?php print $listeArti[$i]['image']; ?></td>
                         <td><?php print $listeArti[$i]['prix']; ?></td>
                         <?php
-                            $categorie="-";
-                            for($j=1;$j<$nbrCat;$j++)
-                                if($listeArti[$i]['fk_categorie']==$j)
+                            $categorie='-';
+                            for($j=0;$j<$nbrCat;$j++){
+                                if($listeArti[$i]['fk_categorie']==$listeCat[$j]['id_categorie'])
                                     $categorie=$listeCat[$j]['intitule'];
+                            }
                         ?>
                         <td><?php print utf8_encode($categorie); ?></td>
                         <?php $id=$listeArti[$i]['id_article']; $lastId = $i;?>
@@ -238,10 +230,10 @@
 <?php 
     function alert($type,$message){ ?>
         <span class="margin-center"></span>
-        <div class="centrer alert <?php print $type?> alert-dismissable fade in">
+        <div class="centrer alert <?php print $type?> alert-dismissable fade in" id="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php print $message;?>
-            <a href="#" data-dismiss="alert" class="btn btn-inverse btn-xs pull-left glyphicon glyphicon-refresh close" onClick="window.location.href=window.location.href"></a>
+            <a id="refreshAlert" href="index.php?page=articles_admin" data-dismiss="alert" class="btn btn-inverse btn-xs pull-left glyphicon glyphicon-refresh close" ></a>
         </div>
         <?php
     }

@@ -93,7 +93,6 @@ class VueArticle{
         $date=0;
         try{
            $query = "SELECT update_article(:idarticle,:nom,:description,:image,:categorie,:prix)";
-           print 'DAO : CAT ID : '.$catUp;
            $resultset = $this->_db->prepare($query);
            $resultset->bindValue(1,$idarticle);
            $resultset->bindValue(2,$nomUp);

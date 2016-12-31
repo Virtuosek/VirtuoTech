@@ -56,6 +56,15 @@ $(document).ready(function(){
 /**/
 
 /* clients_admin.php*/
+
+/*$('.refreshAlert').click(function() {
+   $('.alert').hide();
+});*/
+
+document.getElementById("refreshAlert").onClick=function(){
+    this.style.display="none";
+}
+
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
@@ -95,4 +104,53 @@ $(document).ready(function(){
             $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Aucun résultat</td></tr>'));
         }
     });
+});
+
+jQuery(document).ready(function(){
+
+    jQuery("#register").submit(function(){
+
+            if (jQuery("#nom").val() == "") {
+                    alert("Merci de saisir votre nom");
+                    jQuery("#nom").focus();
+                    return false;
+            }
+            if (jQuery("#prenom").val() == "") {
+                    alert("Merci de saisir votre prenom");
+                    jQuery("#prenom").focus();
+                    return false;
+            }
+            if (jQuery("#email").val() == "" || valideEmail(jQuery("#email").val()) ) {
+                    alert("Merci de saisir votre adresse email correcte");
+                    jQuery("#email").focus();
+                    return false;
+            }
+            if (jQuery("#pseudo").val() == "" || valideEmail(jQuery("#pseudo").val()) ) {
+                    alert("Veuillez saisir votre pseudo");
+                    jQuery("#email").focus();
+                    return false;
+            }
+            if (jQuery("#password").val() == "") {
+                    alert("Merci de saisir votre mot de passe");
+                    jQuery("#password").focus();
+                    return false;
+            }
+            if ($('#password').val()!=$('#vpassword').val()) {
+                    alert("Merci de saisir la vérification de votre mot de passe");
+                    jQuery("#vpassword").focus();
+                    return false;
+            }
+
+    });
+
+    function valideEmail(Email){
+            var filtre = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            var valid = filtre.test(Email);
+
+            if (!valid) {
+                    return true;
+            }
+            return false;
+    }
+	
 });

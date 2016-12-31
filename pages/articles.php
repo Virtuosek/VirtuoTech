@@ -48,22 +48,21 @@ if(isset($nbrG) && $nbrG>0){ ?>
                 <a tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<?php print utf8_encode($liste_g[$i]['description']);?>">Plus d'informations</a>
                 <br/><br/>
                 <form method="post">
-                    <div class="row">
-                        <div class="input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                        <div class="input-group col-lg-1 col-md-2 col-sm-2 col-xs-3">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
                             <!-- Le bouton a comme nom l'id de l'article auquel il correspond : -->
                             <?php $id=$liste_g[$i]['id_article'];?>
                             <input type='submit' id="id<?php print $i; ?>" name="id<?php print $id; ?>" class='form-control btn btn-info btn-sm col-md-4 col-lg-4'
                                data-toggle='modal' data-target='#myModal' value='Ajouter à mon panier'>
                         </div>
-                    </div>
+                    
                 </form>
             </div>
-            <hr class="featurette-divider">
+            <hr>
             <div class="mr-bot"></div>
-        <?php
-        }  ?>
-            
+            <?php
+        }
+        ?>
         <div class="col-sm-1">
             <?php if(isset($_SESSION['client'])){ ?>
                 <!-- modal : utilisateur connecté -->
@@ -107,8 +106,8 @@ if(isset($nbrG) && $nbrG>0){ ?>
                 <?php 
             } ?>
         </div>
-    ?>
 </div>
 <?php  }else{
     print 'Empty Database';
 }
+?>

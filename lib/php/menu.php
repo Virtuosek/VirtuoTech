@@ -52,7 +52,7 @@
                                     $pageLink='./index.php?page=articles';
                                     $lien=$liste_type[$i]->id_categorie;
                                     $intitule = utf8_encode($liste_type[$i]->intitule);
-                                    echo "<a href='$pageLink&link=".$lien."'>$intitule</a>";
+                                    echo "<a href='$pageLink&link=".$lien."'>$intitule</a>"
                                 ?>
                             </li>
                         </div>
@@ -78,7 +78,7 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="password_" class="form-control" type="password"  name="password" placeholder="Mot de passe">                                        
                         </div>
-                        <input href=""type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
+                        <input href="" type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
                         <a type="button" class="btn btn-info" href="./index.php?page=inscription">Inscription</a>
                     </div>
                 </form>
@@ -90,7 +90,7 @@
                 <?php 
             }
             ?>
-            <?php include("./pages/contact.php"); ?>;
+            <?php include("./pages/contact.php"); ?>
         </ul>
     </div>
     </div>

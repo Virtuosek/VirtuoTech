@@ -14,6 +14,21 @@ class DAOCategorie{
         $this->_db=$cnx;
     }
     
+    /* Create */
+    public function create_category($intitule){
+        $retour=null;
+        try{
+            $query="SELECT create_categorie(:intitule) as retour";
+            $sql=$this->_db->prepare($query);
+            $sql->bindValue(1,$intitule);
+            $sql->execute();
+            $retour=$sql->fetchColumn(0);
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $retour;
+    }
+    
     /* ReadAll : */
     public function readAll(){
         try{
@@ -25,5 +40,35 @@ class DAOCategorie{
             print $ex->getMessage();
         }
         return $data;
+    }
+    
+    /* Update */
+    public function update_category($idCat,$intitule){
+        try{
+           $query = "SELECT update_category(:idcategorie,:intitule)";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,idcategorie);
+           $resultset->bindValue(2,intitule);
+           $resultset->execute();
+           $data=$resultset->fetch();
+            return $data;
+        } catch (PDOException $ex) {
+           alert("alert-danger","La modification n'a pas été effectuée.");
+        }
+    }
+    
+    /* Delete : */
+    public function delete($idCat){
+        $retour=null;
+        try{
+            $query="SELECT del_categorie(:idCat)";
+            $sql=$this->_db->prepare($query);
+            $sql->bindValue(1,$idCat);
+            $sql->execute();
+            $retour=$sql->fetchColumn(0);
+        } catch (PDOException $ex) {
+             alert("alert-danger","La suppression n'a pas été effectuée. Il se peut que cette catégorie contient un ou plusieurs articles");
+        }
+        return $retour;
     }
 }

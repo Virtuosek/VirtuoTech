@@ -4,7 +4,7 @@
     ?>
 
     <header class="mr-top-m20">
-        <a href="./index.php?page=accueil">
+        <a href="./index.php?page=accueil_admin">
             <img src="./admin/images/ban1.jpg" alt="VirtuoTech" class="img-responsive"/>
         </a>
     </header>
@@ -27,13 +27,13 @@
     ?>
 
     <footer>
-        <!--<div class="mrg-bot-200"></div>-->
-        <div class="navbar navbar-inverse navbar-fixed-bottom">
-            <div class="centrer">
-                <div class= "text-muted txt100">
+        <div class="panel panel-default black">
+            <div class="panel-footer">
+                <div class="centrer graytext">
                     <p> CopyRight VirtuoTech 2016 All Rights Reserved.</p>
                 </div>
             </div>
+        </div>
     </footer>
 
     <a id="back-to-top" class="btn btn-primary bt-retour"><span class="glyphicon glyphicon-chevron-up"></span></a>

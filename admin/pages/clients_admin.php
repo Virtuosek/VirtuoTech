@@ -1,6 +1,6 @@
 
 <div class="background3">
-<div class="container mr-bot">
+<div class="container">
 
 <?php
     $ObjClient = new DAOClient($cnx);
@@ -16,6 +16,7 @@
                 <td><input id='nom' name='nom' type='text' placeholder='Nom' class='form-control'></td>
                 <td><input id='prenom' name='prenom' type='text' placeholder='Prénom' class='form-control'></td>
                 <td><input id='pseudo' name='pseudo' type='text' placeholder='Pseudo'  class='form-control'></td>
+                <td><input id='mdp' name='mdp' type='text' placeholder='Mot de passe'  class='form-control'></td>
                 <td><input id='email' name='email'type='text' placeholder='Email'  class='form-control'></td>
                 <td>
                     <select class="custom-select form-control" name="Types[]">
@@ -37,29 +38,96 @@
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $pseudo = $_POST['pseudo'];
+        $mdp = $_POST['mdp'];
         $email = $_POST['email'];
             
         if(!empty($nom) && !empty($prenom) && !empty($pseudo) && !empty($email)){
-            
-            /* Aucun article n'est sélectionné : */
             $type=0;
-            foreach ($_POST['Types'] as $a) {
+            foreach ($_POST['Types'] as $a) 
                 $type=$a;
-            }
-            if($type==0){
-                alert("alert-danger","Veuillez selectionner une catégorie");
-            }
+            if($type==0)
+                alert("alert-danger","Veuillez selectionner un type de client");
             else{
+                /* $type peut être un string ou un int : */
+                if($type=="Administrateur" || $type==2) $type=2;
+                else if($type=="Client" || $type==1) $type=1;
                /* Ajout de l'article : */
-               $addedArt = $ObjArticle->create_article($nom, $description, $image, $idCategorie, $prix);
-               if($addedArt!=0){
-                   alert("alert-success","L'article <?php print $nom ?> a été ajouté.");
-               }
+               $newUser = $ObjClient->create_client($nom, $prenom, $pseudo, $mdp, $email, $type);
+               if($newUser!=0)
+                   alert("alert-success","Le client <?php print $nom ?> a été ajouté.");
                else
                    alert("alert-danger","L'ajout n'a pas été effectué.");
-           }
+            }
         }else
             alert("alert-danger","Veuillez remplir tous les champs.");
+    }
+    
+/* Update (Form) : */
+    for($i=0;$i<999;$i++){
+        if(isset($_POST['up'.$i])){
+            /* Comme pour la création, créer une ligne comprenant les infos du client sélectionné : */
+            $clientUp = $ObjClient->readCli($i);
+            ?>
+            <span class="margin-center"></span>
+            <table class="container">
+                <form method="get">
+                    <td><input readonly name='idCliUp' type='text' value="<?php print utf8_encode($clientUp['id_client']);?>" class='form-control'></td>
+                    <td><input  name='nomCliUp' type='text' value="<?php print utf8_encode($clientUp['nom_client']); ?>" class='form-control'></td>
+                    <td><input  name='prenomUp' type='text'value="<?php print utf8_encode($clientUp['prenom']); ?>" class='form-control'></td>
+                    <td><input  name='pseudoUp' type='text' value="<?php print utf8_encode($clientUp['pseudo']); ?>"  class='form-control'></td>
+                    <td><input  name='emailUp' type='text' value="<?php print utf8_encode($clientUp['email']); ?>"  class='form-control'></td>
+                    <td>
+                        <select class="custom-select form-control" name="Type[]">
+                                <!-- Afficher par défaut le type auquel le client appartient : -->
+                                <?php if($clientUp['type_client']==1){ ?>
+                                <option value="1" selected>Client</option>
+                                <option value="2">Administrateur</option>
+                                <?php }else{ ?>
+                                <option value="1">Client</option>
+                                <option value="2" selected>Administrateur</option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td><input name='updateA' id='updateA' type='submit' value='MAJ' class='mrg-left btn btn-warning btn-sm'></td>
+                    <td><input name='cancel' type='submit' value='X' class='btn btn-danger btn-sm'></td>
+                </form>
+            </table>
+            <?php
+        }
+    }
+    
+/* Update (DB) : */
+    if(isset($_GET['updateA'])){
+        print 'updating';
+        $idCli = $_GET['idCliUp'];
+        $nom = $_GET['nomCliUp'];
+        $prenom = $_GET['prenomUp'];
+        $pseudo = $_GET['pseudoUp'];
+        $email = $_GET['emailUp'];
+
+        if(!empty($nom) && !empty($prenom) && !empty($pseudo) && !empty($email)){
+            $type=0;
+            foreach ($_GET['Type'] as $a) 
+                $type=$a;
+            $typeCli=1;
+            if($type=="Administrateur" || $type==2) $typCli=2;
+            else if($type=="Client" || $type==1) $typCli=1;
+            $updatedClient = $ObjClient->update_client($idCli, $nom, $prenom, $pseudo, $email, $typCli);
+            if($updatedClient!=0 && $idCli!=0)
+                alert("alert-success","Le client <?php print $nom ?> a été modifié.");
+        }
+        else
+            alert("alert-danger","Veuillez remplir tous les champs.");
+    }
+    
+/* Delete (DB) : */
+    for($i=0;$i<999;$i++){
+        if(isset($_POST['id'.$i])){
+            $deleted=$ObjClient->delete_client($i);
+            if($deleted<=0)
+                alert("alert-success","Le client a été supprimé.");
+            /* Exception Handling : dans le DAO Article */
+        }
     }
     
 ?>
@@ -122,7 +190,6 @@
         </table>
     </div>
 </div>
-        
 </div>
 </div>
 
@@ -132,7 +199,7 @@
         <div class="centrer alert <?php print $type?> alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <?php print $message;?>
-            <a href="#" data-dismiss="alert" class="btn btn-inverse btn-xs pull-left glyphicon glyphicon-refresh close" onClick="window.location.href=window.location.href"></a>
+            <a href="index.php?page=clients_admin" data-dismiss="alert" class="btn btn-inverse btn-xs pull-left glyphicon glyphicon-refresh close"></a>
         </div>
         <?php
     }

@@ -1,4 +1,3 @@
-<div class="background">
 <div class="container">
 <div class="margin-top"></div>
 
@@ -90,6 +89,16 @@ if(isset($_SESSION['client'])){
         }
         header("Refresh:0");
     }
+    
+     /* Bouton : vider */
+    if(isset($_POST['del_all'])){
+        print 'deleting';
+        for($i=0;$i<$nbrG;$i++){
+            $del=$ObjPanier->deleteArticleFromCart($liste_g[$i]['id_article'],$_SESSION['client']);
+        }
+        header("Refresh:0");
+    }
+
         
     if($nbrG==0){
         ?>
@@ -108,6 +117,12 @@ if(isset($_SESSION['client'])){
                     <div class="input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
                         <button id="submit_all" name="submit_all" type="submit" class='form-control btn btn-info btn-sm col-md-4 col-lg-4'>Tout commander</button>
+                    </div>
+                </form>
+                <form method="post">
+                    <div class="input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                        <button id="del_all" name="del_all" type="submit" class='form-control btn btn-warning btn-sm col-md-4 col-lg-4'>Vider</button>
                     </div>
                 </form>
             </div>
@@ -132,19 +147,17 @@ if(isset($_SESSION['client'])){
                         <?php print utf8_encode($liste_a[$j]['description']);?>
                         <br/><br/>
                         <form method="post">
-                            <div class="row">
-                                <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
-                                    <?php $id=$liste_g[$i]['id_panier'];?>
-                                    <button type="submit" id="id<?php print $i; ?>" name="id<?php print $id; ?>" 
-                                            class='form-control btn btn-danger btn-sm col-md-4 col-lg-4'>Supprimer</button>
-                                </div>
-                                <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
-                                    <?php $id=$liste_g[$i]['id_article'];?>
-                                   <button type="submit" id="cm<?php print $i; ?>" name="cm<?php print $id; ?>"
-                                           class='form-control btn btn-primary btn-sm col-md-4 col-lg-4' onclick="init()">Commander</button>
-                                </div>
+                            <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                                <?php $id=$liste_g[$i]['id_panier'];?>
+                                <button type="submit" id="id<?php print $i; ?>" name="id<?php print $id; ?>" 
+                                        class='form-control btn btn-danger btn-sm col-md-4 col-lg-4'>Supprimer</button>
+                            </div>
+                            <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                <?php $id=$liste_g[$i]['id_article'];?>
+                               <button type="submit" id="cm<?php print $i; ?>" name="cm<?php print $id; ?>"
+                                       class='form-control btn btn-primary btn-sm col-md-4 col-lg-4' onclick="init()">Commander</button>
                             </div>
                         </form>
                     </div>
@@ -177,5 +190,5 @@ else{
     <?php 
 }
 ?>
-</div>
+    
 </div>
