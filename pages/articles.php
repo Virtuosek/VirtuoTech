@@ -53,8 +53,8 @@ if(isset($nbrG) && $nbrG>0){ ?>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
                             <!-- Le bouton a comme nom l'id de l'article auquel il correspond : -->
                             <?php $id=$liste_g[$i]['id_article'];?>
-                            <button id="id<?php print $i; ?>" name="id<?php print $id; ?>" class='form-control btn btn-info btn-sm col-md-4 col-lg-4' 
-                               data-toggle='modal' data-target='#myModal'>Ajouter à mon panier</button>
+                            <input type='submit' id="id<?php print $i; ?>" name="id<?php print $id; ?>" class='form-control btn btn-info btn-sm col-md-4 col-lg-4'
+                               data-toggle='modal' data-target='#myModal' value='Ajouter à mon panier'>
                         </div>
                     </div>
                 </form>

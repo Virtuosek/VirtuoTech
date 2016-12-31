@@ -88,8 +88,30 @@ class VueArticle{
         return $data;
     }
     
+    /* Update : */
+     public function updateArticle($idarticle,$nomUp,$descriUp,$imageUp,$catUp,$prixUp){
+        $date=0;
+        try{
+           $query = "SELECT update_article(:idarticle,:nom,:description,:image,:categorie,:prix)";
+           print 'DAO : CAT ID : '.$catUp;
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idarticle);
+           $resultset->bindValue(2,$nomUp);
+           $resultset->bindValue(3,$descriUp);
+           $resultset->bindValue(4,$imageUp);
+           $resultset->bindValue(5,$catUp);
+           $resultset->bindValue(6,$prixUp);
+           $resultset->execute();
+           $data=$resultset->fetch();
+            return $data;
+        } catch (PDOException $ex) {
+           alert("alert-danger","La modification n'a pas été effectuée.");
+        }
+    }
+    
     /* Delete (idArticle)*/
     public function deleteArticle($idArticle){
+        $retour=1;
         try{
             $query = "SELECT del_article(:idArticle) as retour ";
             $sql=$this->_db->prepare($query);
@@ -102,6 +124,7 @@ class VueArticle{
             <div class="centrer alert alert-danger alert-dismissable fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 L'article n'a pas été supprimé ! Il se peut qu'un client ait commandé ou ajouté cet article à son panier.
+                <a href="#" data-dismiss="alert" class="btn btn-inverse btn-xs pull-left glyphicon glyphicon-refresh" onClick="window.location.href=window.location.href"></a>
             </div>
             <?php
         }

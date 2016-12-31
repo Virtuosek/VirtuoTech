@@ -4,7 +4,7 @@
     include ('./admin/lib/php/adm_liste_include.php');
     $cnx=Connexion::getInstance($dsn, $user, $password);
     session_start();    
-    error_reporting(0); // Supprimer les alertes/notices... de PHP
+    //error_reporting(0); // Supprimer les alertes/notices... de PHP
 ?>
 <html>
 <head>
@@ -24,72 +24,72 @@
 </head>
 
 <body>
-    <div class="">
-        <!-- Menu : -->
+    <!-- Menu : -->
+    <?php
+    if(!isset($_SESSION['admin'])){
+        if(file_exists('./lib/php/menu.php')){
+            include('./lib/php/menu.php');
+        }
+    }else{
+        if(file_exists('./admin/pages/menu_admin.php')){
+            include('./admin/pages/menu_admin.php');
+        }
+    }
+    ?>
+
+    <!-- Header -->
+    <?php if(!isset($_SESSION['admin'])){ ?>
+        <header class="margin-bot">
+            <a href="./index.php?page=accueil">
+                <img src="./admin/images/ban2.png" alt="VirtuoTech" class="img-responsive"/>
+            </a>
+        </header>
         <?php
-        if(!isset($_SESSION['admin'])){
-            if(file_exists('./lib/php/menu.php')){
-                include('./lib/php/menu.php');
-            }
-        }else{
-            if(file_exists('./admin/pages/menu_admin.php')){
-                include('./admin/pages/menu_admin.php');
-            }
-        }
-        ?>
-        
-        <!-- Header -->
-        <?php if(!isset($_SESSION['admin'])){ ?>
-            <header class="margin-bot">
-                <a href="./index.php?page=accueil">
-                    <img src="./admin/images/ban2.png" alt="VirtuoTech" class="img-responsive"/>
-                </a>
-            </header>
-            <?php
-        }else{ ?>
-           <header class="margin-bot">
-                <a href="./index.php?page=accueil">
-                    <img src="./admin/images/ban1.jpg" alt="VirtuoTech" class="img-responsive"/>
-                </a>
-            </header class="margin-bot">
-            <?php
-        }
-        
-        /* Pages : */
-        if(!isset($_SESSION['page'])){
-            if(isset($_SESSION['admin']))
-                $_SESSION['page']="accueil_admin";
-            else
-                 $_SESSION['page']="accueil";
-        }
-        
-        if(isset($_GET['page'])){
-            $_SESSION['page']=$_GET['page'];
-        }
-        
+    }else{ ?>
+       <header class="margin-bot">
+            <a href="./index.php?page=accueil">
+                <img src="./admin/images/ban1.jpg" alt="VirtuoTech" class="img-responsive"/>
+            </a>
+        </header class="margin-bot">
+        <?php
+    }
+
+    /* Pages : */
+    if(!isset($_SESSION['page'])){
         if(isset($_SESSION['admin']))
-            $path='./admin/pages/'.$_SESSION['page'].'.php';
-        else {
-            $path='./pages/'.$_SESSION['page'].'.php';
-        }
-       
-        if(file_exists($path)){
-            include($path);
-        }
-        else{
-            include './pages/404.php';
-        }
-        ?>
-        <!-- Footer -->
-        <footer>
-            <div class="navbar navbar-inverse navbar-fixed-bottom">
-                <div class="centrer">
-                    <div class= "text-muted txt100">
+            $_SESSION['page']="accueil_admin";
+        else
+             $_SESSION['page']="accueil";
+    }
+
+    if(isset($_GET['page'])){
+        $_SESSION['page']=$_GET['page'];
+    }
+
+    if(isset($_SESSION['admin']))
+        $path='./admin/pages/'.$_SESSION['page'].'.php';
+    else {
+        $path='./pages/'.$_SESSION['page'].'.php';
+    }
+
+    if(file_exists($path)){
+        include($path);
+    }
+    else{
+        include './pages/404.php';
+    }
+    ?>
+    <!-- Footer -->
+    <footer>
+        <!--<div class="mrg-bot-200"></div>-->
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="centrer">
+                <div class= "text-muted txt100">
                     <p> CopyRight VirtuoTech 2016 All Rights Reserved.</p>
                 </div>
             </div>
-        </footer>
-    </div>
+    </footer>
+        
     <a id="back-to-top" class="btn btn-primary bt-retour"><span class="glyphicon glyphicon-chevron-up"></span></a>
 </body>
 </html>

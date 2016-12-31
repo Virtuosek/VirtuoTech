@@ -1,7 +1,9 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
-<div class="bottom background">
+<div class="background">
+<div class="container">
+    <div class="margin-top"></div>
 <?php
    if(isset($_POST['submit_register'])){
         $ObjClient=new DAOClient($cnx);
@@ -38,7 +40,7 @@
     }
 ?>
 <form action="index.php?page=inscription" method="post" id="form_auth_2_">
-    <div class="row margin-top">
+    <div class="row mrg-top">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
             <div class="input-group ">
@@ -53,6 +55,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-8 col-md-10 col-sm-10">
@@ -62,6 +65,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
@@ -71,6 +75,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
@@ -86,10 +91,12 @@
             </div>
         </div>
     </div> 
+    
     <div class="pad bot col-lg-4 col-md-3 col-sm-3"></div>
+    
     <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
         <input type="submit" class="btn btn-primary btn-md btn-block" name="submit_register" id="submit_register" value="S'inscrire"/>
-        <!-- <button type="submit" class="btn btn-primary btn-lg btn-block" name="submit_register" id="submit_register_" values="S'inscrire"/> -->
     </div>
+    <div class="mrg-bot"></div>
 </form>
 </div>

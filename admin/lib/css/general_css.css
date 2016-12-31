@@ -13,7 +13,6 @@
     background-image: url("../..//images/background.jpg");
     height:100%;
     width:100%;
-    margin-top:-10px;
 }
 
 .background2{
@@ -139,6 +138,9 @@
 }
 .mrg-bot-50{
     margin-bottom:50px;
+}
+.mrg-bot-200{
+    margin-bottom:200px;
 }
 .margin-top{
     margin-top:50px;
@@ -381,7 +383,7 @@ label{
     }
 }
 
-@media (min-width:50px) and (max-width:375px)   {
+@media (min-width:50px) and (max-width:375px){
     .featurette-divider {
         margin: 10px 0;
     }
