@@ -6,13 +6,16 @@
     text-align: center;
     background-size: cover;
     clear:both;
-    margin-bottom:10px;
 }
 
 .background{
     background-image: url("../..//images/background.jpg");
     height:100%;
     width:100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .background2{
@@ -21,6 +24,15 @@
     width:100%;
     margin-top:-10px;
 }
+
+body {padding:0; margin:0;}
+
+.panel > .panel-footer {
+    background-image: none;
+    background-color: #333333;
+    color: #999999;
+}
+
 
 .background3{
     background: url("../..//images/wallpaper2.jpg") no-repeat center center fixed;
@@ -122,7 +134,7 @@
 
 /* margins */
 .margin-bot{
-    margin-top:-20px;
+    margin-bottom:5%;
 }
 .mrg-bot{
     margin-bottom: 60px;
@@ -139,12 +151,13 @@
 .mrg-bot-50{
     margin-bottom:50px;
 }
-.mrg-bot-200{
-    margin-bottom:200px;
+.mr-top-m20{
+    margin-top:-20px;
 }
 .margin-top{
-    margin-top:50px;
+    margin-top:5%;
 }
+
 .mrg-top{
     margin-top:10px;
 }
@@ -202,14 +215,6 @@
 .error-desc {
   font-size: 12px;
   color: #647788;
-}
-
-.bottom{
-    margin-top:-10px;
-    height:100%;
-    width:100%;
-    position:fixed;
-    text-align:center;
 }
 /**/
 

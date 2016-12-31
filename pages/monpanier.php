@@ -1,3 +1,7 @@
+<div class="background">
+<div class="container">
+<div class="margin-top"></div>
+
 <?php 
 /* Client connecté : */
 if(isset($_SESSION['client'])){
@@ -20,10 +24,8 @@ if(isset($_SESSION['client'])){
                     La suppression n'a pas été effectuée!
                 </div>
                 <?php
-            }else{
-                /* Actualiser la page pour remarquer la suppression : */
+            }else
                 header("Refresh:0");
-            }
         }
         
         /* Ajout à la table Commande les articles souhaités (voir plus bas) :  */
@@ -44,7 +46,8 @@ if(isset($_SESSION['client'])){
                 </div>
                 <?php
             }
-            else{ /* Commande effectuée : */
+            /* Commande effectuée : */
+            else{ 
                 /* Supprimer du panier les articles qui ont été commandés : */
                 $idArt=$j;
                 $idCli=$_SESSION['client'];
@@ -156,9 +159,7 @@ if(isset($_SESSION['client'])){
 /* Client non connecté : */
 else{
     ?>
-    <link rel="stylesheet" href="../admin/lib/css/general_css.css">
-    <div class="bottom background">
-        <div class="mr-bot"></div>
+    <div class="centrer">
         <div class="error-code">:(</div>
         <h3 class="font-bold">Vous n'êtes pas connecté(e)</h3>
         <div class="error-desc">
@@ -172,6 +173,9 @@ else{
             </div>
         </div>
     </div>
+    <div class="margin-bot"></div>
     <?php 
-} 
+}
 ?>
+</div>
+</div>

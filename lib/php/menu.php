@@ -14,22 +14,17 @@
             $ObjClient=new DAOClient($cnx);
             $User=$ObjClient->readInfoClient($_POST['login'],$_POST['password']);
             
-            if($User['type_client']==1){
+            if($User['type_client']==1)
                  $_SESSION['client']=$retour;
-            }
-            else{
+            else
                 $_SESSION['admin']=$retour;
-            }
         }
-        else{
-            //exception handling
+        else
             $message="Données incorrectes";
-        }
-        /* Actualisation de la page pour remarquer le changement : */
+
         header("Refresh:0");
     }
 ?>
-<link href='../admin/lib/css/general_css.css' type='text/css'/>
 
 <nav class="navbar navbar-inverse">
   <div class="container">
@@ -69,73 +64,35 @@
             <li><a href="./index.php?page=monpanier">Mon Panier</a></li> 
             <li><a href="./index.php?page=historique">Historique</a></li> 
             <li><a data-toggle="modal" data-target="#contact" data-original-title>Contact</a></li>
-        <!-- Form de Login -->
-            <?php if(!isset($_SESSION['client']) && !isset($_SESSION['admin'])){?>
-            <form action="<?php print $_SERVER['PHP_SELF']; ?>" method='post' id="form_auth_" class=" navbar-form navbar-right">
-                <div class="row">
-                    <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="login_" class="form-control" type="text" name="login" placeholder="Pseudo">                      
+            <!-- Form de Login -->
+            <?php 
+            if(!isset($_SESSION['client']) && !isset($_SESSION['admin'])) {
+                ?>
+                <form action="<?php print $_SERVER['PHP_SELF']; ?>" method='post' id="form_auth_" class=" navbar-form navbar-right">
+                    <div class="row">
+                        <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="login_" class="form-control" type="text" name="login" placeholder="Pseudo">                      
+                        </div>
+                        <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="password_" class="form-control" type="password"  name="password" placeholder="Mot de passe">                                        
+                        </div>
+                        <input href=""type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
+                        <a type="button" class="btn btn-info" href="./index.php?page=inscription">Inscription</a>
                     </div>
-                    <div class="mrg-left input-group col-lg-4 col-md-3 col-xs-3">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="password_" class="form-control" type="password"  name="password" placeholder="Mot de passe">                                        
-                    </div>
-                    <input type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
-                    <a type="button" class="btn btn-info" href="./index.php?page=inscription">Inscription</a>
-                </div>
-            </form>
-        <?php }else {?> 
+                </form>
+                <?php 
+            }
+            else{
+                ?> 
                 <li><a href="./index.php?page=disconnect">Déconnexion</a></li>
-        <?php } ?>
+                <?php 
+            }
+            ?>
+            <?php include("./pages/contact.php"); ?>;
         </ul>
-        </div>
-        <!-- Modal de contact -->
-        <form action="" method="post">
-        <div class="row">
-            <div class="modal fade" id="contact">
-                <div class="modal-dialog">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="panel-title" id="contactLabel">Une question ? Contactez-nous</h4>
-                        </div>
-                        <form action="#" method="post" accept-charset="utf-8">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="pad-bot col-lg-6 col-md-6 col-sm-6">
-                                    <input class="form-control" name="firstname" placeholder="Prénom" type="text" required autofocus />
-                                </div>
-                                <div class="pad-bot col-lg-6 col-md-6 col-sm-6">
-                                    <input class="form-control" name="lastname" placeholder="Nom" type="text" required />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="pad-bot col-lg-12 col-md-12 col-sm-12">
-                                    <input class="form-control" name="email" placeholder="E-mail" type="text" required />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class=" pad-bot col-lg-12 col-md-12 col-sm-12">
-                                    <input class="form-control" name="subject" placeholder="Sujet" type="text" required />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <textarea  class="form-control" placeholder="Message..." rows="6" name="comment" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pad-bot panel-footer">
-                            <input type="submit" class="btn btn-primary" value="Envoyer"/>
-                            <input type="reset" class="btn btn-default" value="Vider" />
-                            <button class="right-float btn btn-default btn-close" data-dismiss="modal">Fermer</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        </form>    
+    </div>
     </div>
   </div>
 </nav>

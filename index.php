@@ -24,72 +24,59 @@
 </head>
 
 <body>
-    <!-- Menu : -->
-    <?php
-    if(!isset($_SESSION['admin'])){
+<?php
+
+    /* Index Administrateur : */
+    if(isset($_SESSION['admin'])){
+        if(file_exists('./admin/index.php')){
+            include('./admin/index.php');
+        }else{
+            print 'file not found';
+        }
+    }
+    /* Index Client : */
+    else{
+        /* Menu : */
         if(file_exists('./lib/php/menu.php')){
             include('./lib/php/menu.php');
         }
-    }else{
-        if(file_exists('./admin/pages/menu_admin.php')){
-            include('./admin/pages/menu_admin.php');
-        }
-    }
-    ?>
-
-    <!-- Header -->
-    <?php if(!isset($_SESSION['admin'])){ ?>
-        <header class="margin-bot">
+        
+        ?>
+        <header class="mr-top-m20">
             <a href="./index.php?page=accueil">
                 <img src="./admin/images/ban2.png" alt="VirtuoTech" class="img-responsive"/>
             </a>
         </header>
         <?php
-    }else{ ?>
-       <header class="margin-bot">
-            <a href="./index.php?page=accueil">
-                <img src="./admin/images/ban1.jpg" alt="VirtuoTech" class="img-responsive"/>
-            </a>
-        </header class="margin-bot">
-        <?php
-    }
-
-    /* Pages : */
-    if(!isset($_SESSION['page'])){
-        if(isset($_SESSION['admin']))
-            $_SESSION['page']="accueil_admin";
-        else
-             $_SESSION['page']="accueil";
-    }
-
-    if(isset($_GET['page'])){
-        $_SESSION['page']=$_GET['page'];
-    }
-
-    if(isset($_SESSION['admin']))
-        $path='./admin/pages/'.$_SESSION['page'].'.php';
-    else {
+    
+        /* Pages : */
+        if(!isset($_SESSION['page']))
+            $_SESSION['page']="accueil";
+        
+        if(isset($_GET['page']))
+            $_SESSION['page']=$_GET['page'];
+        
         $path='./pages/'.$_SESSION['page'].'.php';
-    }
-
-    if(file_exists($path)){
-        include($path);
-    }
-    else{
-        include './pages/404.php';
-    }
-    ?>
-    <!-- Footer -->
-    <footer>
-        <!--<div class="mrg-bot-200"></div>-->
-        <div class="navbar navbar-inverse navbar-fixed-bottom">
-            <div class="centrer">
-                <div class= "text-muted txt100">
-                    <p> CopyRight VirtuoTech 2016 All Rights Reserved.</p>
+        if(file_exists($path))
+            include($path);
+        else
+            include './pages/404.php';
+        
+        ?>
+    
+        <footer>
+            <div class="panel panel-default black">
+                <div class="panel-footer">
+                    <div class="centrer graytext">
+                        <p> CopyRight VirtuoTech 2016 All Rights Reserved.</p>
+                    </div>
                 </div>
             </div>
-    </footer>
-        
-    <a id="back-to-top" class="btn btn-primary bt-retour"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        </footer>
+    
+        <a id="back-to-top" class="btn btn-primary bt-retour"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        <?php 
+    }
+    ?>
 </body>
 </html>

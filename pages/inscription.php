@@ -3,7 +3,8 @@
 
 <div class="background">
 <div class="container">
-    <div class="margin-top"></div>
+<div class="margin-top"></div>
+
 <?php
    if(isset($_POST['submit_register'])){
         $ObjClient=new DAOClient($cnx);
@@ -90,13 +91,15 @@
                 <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirmez Mot de passe"/>
             </div>
         </div>
-    </div> 
+    </div>
     
     <div class="pad bot col-lg-4 col-md-3 col-sm-3"></div>
     
     <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
         <input type="submit" class="btn btn-primary btn-md btn-block" name="submit_register" id="submit_register" value="S'inscrire"/>
     </div>
-    <div class="mrg-bot"></div>
+    
+    <div class="margin-bot"></div>
 </form>
+</div>
 </div>
