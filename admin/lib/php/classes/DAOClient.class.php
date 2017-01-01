@@ -12,7 +12,6 @@ class DAOClient {
     public function create_client($nom,$prenom,$pseudo,$mdp,$email,$typeCli){
         $retour=array();
         try{
-            print 'typeCli:'.$typeCli.' nomCli:'.$nom;
             $query="SELECT create_client(:nom,:prenom,:pseudo,:mdp,:email,:typeCli) as retour";
             $sql=$this->_db->prepare($query);
             $sql->bindValue(':nom',$nom);

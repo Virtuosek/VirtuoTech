@@ -10,11 +10,11 @@
     if(isset($_POST['newCategory'])){
        ?>
         <span class="margin-center"></span>
-        <table class="container">
+        <table>
             <form method="post">
                 <td><input id='intitule' name='intitule' type='text' placeholder='Intitulé' class=' form-control centrer'></td>
-                <td><input  name='createCategory' type='submit' value='+' class=' btn btn-success btn-sm'></td>
-                <td><input  name='cancel' type='submit' value='X' class=' btn btn-danger btn-sm'></td>
+                <td><input  name='createCategory' type='submit' value='Ajouter' class='mrg-left btn btn-success btn-sm'></td>
+                <td><input  name='cancel' type='submit' value='Annuler' class='btn btn-danger btn-sm'></td>
             </form>
         </table>
         <?php
@@ -36,6 +36,39 @@
             alert("alert-danger","Veuillez remplir tous les champs.");
     }
     
+/* Update (Form) : */
+    for($i=0;$i<999;$i++){
+        if(isset($_POST['up'.$i])){
+            /* Comme pour la création, créer une ligne comprenant l'intitulé de la catégorie sélectionnée : */
+            $categorieUp = $ObjCategorie->read($i);
+            ?>
+            <span class="margin-center"></span>
+            <table>
+                <form method="get">
+                    <td><input readonly name='idCatUp' type='text' value="<?php print utf8_encode($categorieUp['id_categorie']);?>" class='form-control'></td>
+                    <td><input  name='intituleUp' type='text' value="<?php print utf8_encode($categorieUp['intitule']); ?>" class='form-control'></td>
+                    <td><input name='updateC' type='submit' value='Modifier' class='mrg-left btn btn-warning btn-sm'></td>
+                    <td><input name='cancel' type='submit' value='Annuler' class='btn btn-danger btn-sm'></td>
+                </form>
+            </table>
+            <?php
+        }
+    }
+    
+/* Update (DB) : */
+    if(isset($_GET['updateC'])){
+        $idCatUp = $_GET['idCatUp'];
+        $intituleUp = $_GET['intituleUp'];
+
+        if(!empty($intituleUp)){
+            $updatedCategory = $ObjCategorie->update_category($idCatUp, $intituleUp);
+            if($updatedCategory!=0 && $idCatUp!=0)
+                alert("alert-success","La catégorie a été modifiée.");
+        }
+        else
+            alert("alert-danger","Veuillez remplir tous les champs.");
+    }
+    
 /* Delete (DB) : */
     for($i=0;$i<999;$i++){
         if(isset($_POST['id'.$i])){
@@ -45,9 +78,8 @@
         }
     }
 ?>
-    
 <div class="row">
-    <div class="panel panel-primary filterable ">
+    <div class="panel panel-primary filterable">
         <div class="panel-heading">
             <h3 class="panel-title">Catégories</h3>
             <div class="pull-right">
@@ -57,33 +89,33 @@
                 <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filtrer</button>
             </div>
         </div>
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive" id="tab_logic">
             <thead>
                 <tr class="filters">
                     <th><input class="centrer" type="text" class="form-control" placeholder="Identifiant" disabled></th>
                     <th><input class="centrer" type="text" class="form-control" placeholder="Intitulé" disabled></th>
-                    <th><input class="centrer" type="text" class="form-control" placeholder="Modifier" disabled></th>
-                    <th><input class="centrer" type="text" class="form-control" placeholder="Supprimer" disabled></th>
+                    <th><input class="margin-center" type="text" class="form-control" placeholder="Modifier" disabled></th>
+                    <th><input class="margin-center" type="text" class="form-control" placeholder="Supprimer" disabled></th>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 <?php
                 for($i=0;$i<$nbrCat;$i++){ ?>
                     <tr>
-                        <td><?php print $listeCat[$i]['id_categorie']; ?></td>
-                        <td><?php print utf8_encode($listeCat[$i]['intitule']); ?></td>
+                        <td class="centrer"><?php print $listeCat[$i]['id_categorie']; ?></td>
+                        <td class="centrer"><?php print utf8_encode($listeCat[$i]['intitule']); ?></td>
                         <td>
                             <?php $id=$listeCat[$i]['id_categorie'];?>
                             <form method="post">
-                                <button class="btn btn-primary btn-xs confirm-delete" id="up<?php print $i; ?>" name="up<?php print $id; ?>">
-                                    <span class="glyphicon glyphicon-pencil"></span>
+                                <button class="margin-center btn btn-primary btn-xs confirm-delete" id="up<?php print $i; ?>" name="up<?php print $id; ?>">
+                                    Modifier
                                 </button>
                             </form>
                         </td>
                         <td>
                             <form method="post">
-                                <button class="btn btn-danger btn-xs confirm-delete" id="id<?php print $i; ?>" name="id<?php print $id; ?>">
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                <button class="margin-center btn btn-danger btn-xs confirm-delete" id="id<?php print $i; ?>" name="id<?php print $id; ?>">
+                                    Supprimer
                                 </button>
                             </form>
                         </td>

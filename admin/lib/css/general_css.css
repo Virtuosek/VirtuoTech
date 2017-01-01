@@ -18,11 +18,47 @@
     background-size: cover;
 }
 
+html{
+  background: url("../..//images/background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.height1{
+    height:500px;
+    background-image: url("../..//images/empty.jpg");
+    background-size: cover;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    outline: 0 none;
+}
+
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:10px;
+   height:20px;
+   width:100%;
+}
+
 .background2{
-    background-image: url("../..//images/tumbleweed.jpg");
+    background-image: url("../..//images/empty.jpg");
     height:100%;
     width:100%;
-    margin-top:-10px;
+    text-align: center;
+    background-size: cover;
+    clear:both;
+}
+
+.absolute{
+    position: fixed;
+    z-index: 100; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
 }
 
 body{
@@ -159,7 +195,6 @@ body{
 .margin-top{
     margin-top:5%;
 }
-
 .mrg-top{
     margin-top:10px;
 }
@@ -169,6 +204,9 @@ body{
 .margin-center{
     margin-left:50%;
     margin-right:50%;
+}
+.margin-left{
+    margin-left:5%;
 }
 .mrg-left{
     margin-left:10px;
@@ -181,6 +219,9 @@ body{
 }
 .mrg-right-20{
     margin-right:20px;
+}
+.margin-right{
+    margin-right:5%;
 }
 /**/
 

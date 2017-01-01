@@ -11,7 +11,7 @@
     if(isset($_POST['newClient'])){
        ?>
         <span class="margin-center"></span>
-        <table class="container">
+        <table>
             <form method="post">
                 <td><input id='nom' name='nom' type='text' placeholder='Nom' class='form-control'></td>
                 <td><input id='prenom' name='prenom' type='text' placeholder='Prénom' class='form-control'></td>
@@ -25,8 +25,16 @@
                         <option value='2'>Administrateur</option>
                     </select>
                 </td>
-                <td><input  name='createUser' type='submit' value='+' class='mrg-left btn btn-success btn-sm'></td>
-                <td><input  name='cancel' type='submit' value='X' class='btn btn-danger btn-sm'></td>
+                <td>
+                    <button name='createUser' type='submit' class='mrg-left btn btn-success btn-sm'>
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </td>
+                <td>
+                    <button name='cancel' type='submit' class='mrg-left btn btn-danger btn-sm'>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
             </form>
         </table>
         <?php
@@ -51,7 +59,7 @@
                 /* $type peut être un string ou un int : */
                 if($type=="Administrateur" || $type==2) $type=2;
                 else if($type=="Client" || $type==1) $type=1;
-               /* Ajout de l'article : */
+               /* Création du client : */
                $newUser = $ObjClient->create_client($nom, $prenom, $pseudo, $mdp, $email, $type);
                if($newUser!=0)
                    alert("alert-success","Le client <?php print $nom ?> a été ajouté.");
@@ -69,7 +77,7 @@
             $clientUp = $ObjClient->readCli($i);
             ?>
             <span class="margin-center"></span>
-            <table class="container">
+            <table>
                 <form method="get">
                     <td><input readonly name='idCliUp' type='text' value="<?php print utf8_encode($clientUp['id_client']);?>" class='form-control'></td>
                     <td><input  name='nomCliUp' type='text' value="<?php print utf8_encode($clientUp['nom_client']); ?>" class='form-control'></td>
@@ -88,8 +96,16 @@
                                 <?php } ?>
                         </select>
                     </td>
-                    <td><input name='updateA' id='updateA' type='submit' value='MAJ' class='mrg-left btn btn-warning btn-sm'></td>
-                    <td><input name='cancel' type='submit' value='X' class='btn btn-danger btn-sm'></td>
+                    <td>
+                        <button name='updateA' id='updateA' type='submit' class='mrg-left btn btn-warning btn-sm'>
+                            <span class="glyphicon glyphicon-saved"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button name='cancel' type='submit' class='mrg-left btn btn-danger btn-sm'>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </form>
             </table>
             <?php
@@ -98,7 +114,6 @@
     
 /* Update (DB) : */
     if(isset($_GET['updateA'])){
-        print 'updating';
         $idCli = $_GET['idCliUp'];
         $nom = $_GET['nomCliUp'];
         $prenom = $_GET['prenomUp'];
@@ -114,7 +129,7 @@
             else if($type=="Client" || $type==1) $typCli=1;
             $updatedClient = $ObjClient->update_client($idCli, $nom, $prenom, $pseudo, $email, $typCli);
             if($updatedClient!=0 && $idCli!=0)
-                alert("alert-success","Le client <?php print $nom ?> a été modifié.");
+                alert("alert-success","Le client a été modifié.");
         }
         else
             alert("alert-danger","Veuillez remplir tous les champs.");
@@ -124,7 +139,7 @@
     for($i=0;$i<999;$i++){
         if(isset($_POST['id'.$i])){
             $deleted=$ObjClient->delete_client($i);
-            if($deleted<=0)
+            if(is_int($deleted))
                 alert("alert-success","Le client a été supprimé.");
             /* Exception Handling : dans le DAO Article */
         }

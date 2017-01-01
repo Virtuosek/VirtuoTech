@@ -4,7 +4,7 @@
     <div class="featurette">
         <img class="featurette-image img-responsive pull-right img_350x350" src="./admin/images/users.png">
         <h2 class="featurette-heading">Gestion des clients <br>
-            <span class="text-muted small">Lister, modifier ou supprimer</span>
+            <span class="text-muted small">Créer, lister, modifier ou supprimer</span>
         </h2>
         <p class="lead">
             La liste des clients enregistrés dans le site est à votre disposition.<br>
@@ -30,7 +30,7 @@
     <div class="featurette">
         <img class="featurette-image img-circle img-responsive pull-right img_350x350" src="./admin/images/server.jpg.">
         <h2 class="featurette-heading">Gestion des catégories<br>
-            <span class="text-muted small">Lister, ajouter ,supprimer</span>
+            <span class="text-muted small">Lister, ajouter ,supprimer ou modifier</span>
         </h2>
         <p class="lead">
             Tous les articles font partie d'une catégorie.<br>
@@ -43,7 +43,7 @@
     <div class="featurette">
         <img class="featurette-image img-circle img-responsive pull-left img_350x350" src="./admin/images/shipping.jpg">
         <h2 class="featurette-heading">Gestion des commandes<br>
-            <span class="text-muted small">Lister, modifier l'état, supprimer</span>
+            <span class="text-muted small">Lister, créer, supprimer et gérer l'état</span>
         </h2>
         <p class="lead">
             Et pour finir, la gestion des commandes, qui vous permet de voir la liste des commandes, modifier l'état ou la supprimer.

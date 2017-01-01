@@ -10,13 +10,13 @@
         $ObjClient=new DAOClient($cnx);
         $retour=null;
         /* NYI : Controle de saisie */
-        //if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
+        if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
             
             /* Le type par défaut de l'utilisateur est 1 : client */
             $retour=$ObjClient->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email'],1);
             if($retour==1){
                 ?>
-                <div class="alert alert-success alert-dismissable fade in">
+                <div class="centrer alert alert-success alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     Inscription effectuée!
                 </div>
@@ -24,20 +24,20 @@
             }
             else{
                 ?>
-                <div class="alert alert-danger alert-dismissable fade in">
+                <div class="centrer alert alert-danger alert-dismissable fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     L'inscription n'a pas été effectuée!
                 </div>
                 <?php
             }
-        /*}else{
+        }else{
             ?>
-            <div class="alert alert-danger alert-dismissable fade in">
+            <div class="centrer alert alert-danger alert-dismissable fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 Veuillez remplir tous les champs.
             </div>
             <?php
-        }*/
+        }
     }
 ?>
 <form action="index.php?page=inscription" method="post" id="register">
@@ -70,9 +70,9 @@
     <div class="row">
         <div class="col-lg-2 col-md-1 col-sm-1"></div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
-            <div class="input-group ">
+            <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-users fa"></i></span>
-                <input type="text" class="form-control" name="pseudo" id="pseudo"  placeholder="Entrer votre pseudo"/>
+                <input type="text" class="form-control color" name="pseudo" id="pseudo"  placeholder="Entrer votre pseudo"/>
             </div>
         </div>
     </div>
@@ -98,8 +98,9 @@
     <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
         <input type="submit" class="btn btn-primary btn-md btn-block" name="submit_register" id="submit_register" value="S'inscrire"/>
     </div>
-    
+    </form>
+
     <div class="margin-bot"></div>
-</form>
+
 </div>
 </div>

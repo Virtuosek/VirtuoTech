@@ -29,6 +29,20 @@ class DAOCategorie{
         return $retour;
     }
     
+    /* Read : */
+    public function read($idCat){
+        try{
+           $query = "SELECT * FROM categorie WHERE id_categorie=:idCat ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idCat);
+           $resultset->execute();
+           $data=$resultset->fetch();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
     /* ReadAll : */
     public function readAll(){
         try{
@@ -45,14 +59,15 @@ class DAOCategorie{
     /* Update */
     public function update_category($idCat,$intitule){
         try{
-           $query = "SELECT update_category(:idcategorie,:intitule)";
+           $query = "SELECT update_categorie(:idcategorie,:intitule)";
            $resultset = $this->_db->prepare($query);
-           $resultset->bindValue(1,idcategorie);
-           $resultset->bindValue(2,intitule);
+           $resultset->bindValue(1,$idCat);
+           $resultset->bindValue(2,$intitule);
            $resultset->execute();
            $data=$resultset->fetch();
             return $data;
         } catch (PDOException $ex) {
+            print $ex->getMessage();
            alert("alert-danger","La modification n'a pas été effectuée.");
         }
     }

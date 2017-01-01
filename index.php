@@ -6,16 +6,12 @@
     session_start();    
     //error_reporting(0); // Supprimer les alertes/notices... de PHP
 ?>
-<html>
+<html> 
 <head>
     <meta charset="utf-8">
-    <link href="./admin/lib/css/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet">
     <link href="./admin/lib/css/general_css.css" rel="stylesheet">
     <script src="./admin/lib/js/jquery.js"></script>
     <script src="./admin/lib/js/personal_js.js"></script>
-    <script src="./admin/lib/js/functionsJqueryAdmin.js.js"></script>
-    <script src="./admin/lib/js/functionsJqueryVal.js.js"></script>
-    <script src="./admin/lib/js/messagesJqueryVal.js.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -25,35 +21,31 @@
 
 <body>
 <?php
-
     /* Index Administrateur : */
     if(isset($_SESSION['admin'])){
-        if(file_exists('./admin/index.php')){
+        if(file_exists('./admin/index.php'))
             include('./admin/index.php');
-        }else{
-            print 'file not found';
-        }
+        else
+            include './pages/404.php';
     }
     /* Index Client : */
     else{
-        /* Menu : */
-        if(file_exists('./lib/php/menu.php')){
-            include('./lib/php/menu.php');
-        }
         
+        if(file_exists('./lib/php/menu.php'))
+            include('./lib/php/menu.php');
         ?>
+        
         <header class="mr-top-m20">
             <a href="./index.php?page=accueil">
                 <img src="./admin/images/ban2.png" alt="VirtuoTech" class="img-responsive"/>
             </a>
         </header>
+        
         <?php
-    
         /* Pages : */
         if(!isset($_SESSION['page']))
             $_SESSION['page']="accueil";
-        
-        if(isset($_GET['page']))
+        else if(isset($_GET['page']))
             $_SESSION['page']=$_GET['page'];
         
         $path='./pages/'.$_SESSION['page'].'.php';
@@ -63,8 +55,8 @@
             include './pages/404.php';
         
         ?>
-    
-        <footer>
+
+        <footer id="<?php if($_SESSION['page']!="accueil" && $_SESSION['page']!="articles") print 'footer' ?>">
             <div class="panel panel-default black">
                 <div class="panel-footer">
                     <div class="centrer graytext">
@@ -73,7 +65,7 @@
                 </div>
             </div>
         </footer>
-    
+
         <a id="back-to-top" class="btn btn-primary bt-retour"><span class="glyphicon glyphicon-chevron-up"></span></a>
         <?php 
     }

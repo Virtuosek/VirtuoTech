@@ -1,5 +1,3 @@
-<div class="container">
-<div class="margin-top"></div>
 
 <?php 
 /* Client connecté : */
@@ -35,7 +33,7 @@ if(isset($_SESSION['client'])){
             date_default_timezone_set('CET');
             $date = date("d/m/y");
             $ObjCommande = new VueCommande($cnx);
-            $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date);
+            $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date, 1); //Etat par défaut : 1 (Demande envoyée)
             if($idCmd==null || $idCmd==0){
                 /* Exception handling : cas où la commannde n'a pas été effectuée : */
                 ?>
@@ -46,7 +44,7 @@ if(isset($_SESSION['client'])){
                 <?php
             }
             /* Commande effectuée : */
-            else{ 
+            else{
                 /* Supprimer du panier les articles qui ont été commandés : */
                 $idArt=$j;
                 $idCli=$_SESSION['client'];
@@ -61,7 +59,7 @@ if(isset($_SESSION['client'])){
                     </div>
                     <?php
                 }else{
-                    header("Refresh:0");
+                   header("Refresh:0");
                 }
             }
             // NYI : 
@@ -84,7 +82,7 @@ if(isset($_SESSION['client'])){
             date_default_timezone_set('CET');
             $date = date("d/m/y");
             $ObjCommande = new VueCommande($cnx);
-            $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date);
+            $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date,1);
             $delArt=$ObjPanier->deleteArticleFromCart($idArtiCm, $idClient);
         }
         header("Refresh:0");
@@ -103,9 +101,15 @@ if(isset($_SESSION['client'])){
     if($nbrG==0){
         ?>
         <!-- Panier vide :-->
-        <div class='bottom background2'>
-            <h3 class="font-bold mrg-top-30">C'est vide par içi.<br/>
-            <a href="./index.php?page=articles&link=1">Acheter</a> un article ?</h3>
+        <div class="background">
+            <div class="container">
+                <div class="margin-top"></div>
+                <div class='centrer'>
+                    <h3 class="font-bold mrg-top-30">C'est vide par içi.<br/><br/>
+                    <a href="./index.php?page=articles&link=1">Acheter</a> un article ?<br><br/>
+                    Votre <a href="./index.php?page=historique">historique</a>  </h3>
+                </div>
+            </div>
         </div>
         <?php
     }else{
@@ -150,7 +154,7 @@ if(isset($_SESSION['client'])){
                             <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-trash"></i></span>
                                 <?php $id=$liste_g[$i]['id_panier'];?>
-                                <button type="submit" id="id<?php print $i; ?>" name="id<?php print $id; ?>" 
+                                <button type="submit" id="id<?php print $i; ?>" name="id<?php print $id; ?>"
                                         class='form-control btn btn-danger btn-sm col-md-4 col-lg-4'>Supprimer</button>
                             </div>
                             <div class="mrg-left20px input-group col-lg-2 col-md-2 col-sm-2 col-xs-3">
@@ -172,23 +176,26 @@ if(isset($_SESSION['client'])){
 /* Client non connecté : */
 else{
     ?>
-    <div class="centrer">
-        <div class="error-code">:(</div>
-        <h3 class="font-bold">Vous n'êtes pas connecté(e)</h3>
-        <div class="error-desc">
-            Connectez-vous en haut de la page<br/>
-            pour pouvoir visualiser votre historique
-            <div>
-                <a class=" login-detail-panel-button btn">
-                    <i class="fa fa-arrow-left"></i>
-                    <a href="./index.php?page=accueil">Retour à la page d'accueil</a>           
-                </a>
+    <div class="background">
+        <div class="container">
+            <div class="margin-top"></div>
+            <div class="centrer">
+                <div class="error-code">:(</div>
+                <h3 class="font-bold">Vous n'êtes pas connecté</h3>
+                <div class="error-desc">
+                    Connectez-vous en haut de la page<br/>
+                    pour pouvoir visualiser votre historique
+                    <div>
+                        <a class=" login-detail-panel-button btn">
+                            <i class="fa fa-arrow-left"></i>
+                            <a href="./index.php?page=accueil">Retour à la page d'accueil</a>           
+                        </a>
+                    </div>
+                </div>
             </div>
+            <div class="margin-bot"></div>
         </div>
     </div>
-    <div class="margin-bot"></div>
     <?php 
 }
-?>
     
-</div>

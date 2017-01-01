@@ -39,8 +39,16 @@
                         ?>
                     </select>
                 </td>
-                <td><input  name='createArticle' type='submit' value='+' class='mrg-left btn btn-success btn-sm'></td>
-                <td><input  name='cancel' type='submit' value='X' class='btn btn-danger btn-sm'></td>
+                <td>
+                    <button  name='createArticle' type='submit' class='mrg-left btn btn-success btn-sm'>
+                        <span class="glyphicon glyphicon-saved"></span>
+                    </button>
+                    </td>
+                <td>
+                    <button name='cancel' type='submit' class=' btn btn-danger btn-sm'>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
             </form>
         </table>
         <?php
@@ -58,19 +66,18 @@
             
             /* Récupération de l'id de la catégorie sélectionnée : */
             $idCategorie=0;
-            foreach ($_POST['Types'] as $idCat) {
+            foreach ($_POST['Types'] as $idCat)
                 $idCategorie=$idCat;
-            }
+            
             /* Aucun article n'est sélectionné : */
-            if($idCategorie==0){
+            if($idCategorie==0)
                 alert("alert-danger","Veuillez selectionner une catégorie");
-            }
+            
             else{
                /* Ajout de l'article : */
                $addedArt = $ObjArticle->create_article($nom, $description, $image, $idCategorie, $prix);
-               if($addedArt!=0){
+               if($addedArt!=0)
                    alert("alert-success","L'article <?php print $nom ?> a été ajouté.");
-               }
                else
                    alert("alert-danger","L'ajout n'a pas été effectué.");
            }
@@ -109,8 +116,16 @@
                             ?>
                         </select>
                     </td>
-                    <td><input name='updateA' id='updateA' type='submit' value='MAJ' class='mrg-left btn btn-warning btn-sm'></td>
-                    <td><input name='cancel' type='submit' value='X' class='btn btn-danger btn-sm'></td>
+                    <td>
+                        <button name='updateArticle' id='updateArticle' type='submit' class='mrg-left btn btn-warning btn-sm'>
+                            <span class="glyphicon glyphicon-saved"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <button name='cancel' type='submit' class='btn btn-danger btn-sm'>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </form>
             </table>
             <?php
@@ -118,7 +133,7 @@
     }
     
 /* Update (DB) : */
-    if(isset($_GET['updateA'])){
+    if(isset($_GET['updateArticle'])){
         
         $idArt = $_GET['idUp'];
         $nomUp = $_GET['nomUp'];
@@ -128,7 +143,7 @@
 
         if(!empty($nomUp) && !empty($descriUp) && !empty($imageUp) && !empty($prixUp)){
             $catUp=0;
-            $idCatUp=0;
+            $idCatUp;
 
             foreach ($_GET['Cats'] as $idCat)
                 $catUp=$idCat;
@@ -183,7 +198,7 @@
                     <th><input type="text" class="form-control" placeholder="SUP" disabled></th>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 <?php
                 /* Read : */
                 for($i=0;$i<$nbrArti;$i++){ ?>

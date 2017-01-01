@@ -36,10 +36,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="pad-bot panel-footer">
-                    <input type="submit" class="btn btn-primary" value="Envoyer"/>
+                <div class="pad-bot">
+                    <input type="submit" class="btn btn-primary mrg-left" value="Envoyer"/>
                     <input type="reset" class="btn btn-default" value="Vider" />
-                    <button class="right-float btn btn-default btn-close" data-dismiss="modal">Fermer</button>
+                    <button class="right-float btn btn-default btn-close mrg-right-20" data-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>

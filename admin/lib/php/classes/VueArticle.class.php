@@ -33,6 +33,20 @@ class VueArticle{
         return $retour;
     }
     
+    /* Read (idArticle) : */
+    public function read($idArticle){
+        try{
+           $query = "SELECT * FROM article WHERE id_article=:idArticle ";
+           $resultset = $this->_db->prepare($query);
+           $resultset->bindValue(1,$idArticle);
+           $resultset->execute();
+           $data=$resultset->fetch();
+        } catch (PDOException $ex) {
+            print $ex->getMessage();
+        }
+        return $data;
+    }
+    
     /* Read (idArticle)  wrong function*/
     public function readArticle($idArticle){
         try{
@@ -104,6 +118,7 @@ class VueArticle{
            $data=$resultset->fetch();
             return $data;
         } catch (PDOException $ex) {
+            print $ex->getMessage();
            alert("alert-danger","La modification n'a pas été effectuée.");
         }
     }

@@ -56,15 +56,6 @@ $(document).ready(function(){
 /**/
 
 /* clients_admin.php*/
-
-/*$('.refreshAlert').click(function() {
-   $('.alert').hide();
-});*/
-
-document.getElementById("refreshAlert").onClick=function(){
-    this.style.display="none";
-}
-
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
@@ -125,11 +116,11 @@ jQuery(document).ready(function(){
                     jQuery("#email").focus();
                     return false;
             }
-            if (jQuery("#pseudo").val() == "" || valideEmail(jQuery("#pseudo").val()) ) {
+            /*if (jQuery("#pseudo").val() == "" || valideEmail(jQuery("#pseudo").val()) ) {
                     alert("Veuillez saisir votre pseudo");
                     jQuery("#email").focus();
                     return false;
-            }
+            }*/
             if (jQuery("#password").val() == "") {
                     alert("Merci de saisir votre mot de passe");
                     jQuery("#password").focus();
