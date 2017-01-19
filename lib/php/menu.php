@@ -1,18 +1,18 @@
 <?php
 
-    $type=new Type_articleDB($cnx);
-    $liste_type=$type->getType_article();
+    $type=new DAOCategorie($cnx);
+    $liste_type=$type->readAll();
     $nbr=count($liste_type);
     
     if(isset($_POST['submit_login'])){
         
         $ObjAdmin=new AdminBD($cnx);
-        $retour=$ObjAdmin->isAuthorized($_POST['login'],$_POST['password']);
+        $retour=$ObjAdmin->isAuthorized($_POST['login'],md5($_POST['password']));
         
         if($retour!=0){
             
             $ObjClient=new DAOClient($cnx);
-            $User=$ObjClient->readInfoClient($_POST['login'],$_POST['password']);
+            $User=$ObjClient->readInfoClient($_POST['login'],md5($_POST['password']));
             
             if($User['type_client']==1)
                  $_SESSION['client']=$retour;
@@ -50,8 +50,8 @@
                                 <?php
                                     /* Menu dynamique avec envoie de l'id de la catégorie à la page articles.php */
                                     $pageLink='./index.php?page=articles';
-                                    $lien=$liste_type[$i]->id_categorie;
-                                    $intitule = utf8_encode($liste_type[$i]->intitule);
+                                    $lien=$liste_type[$i]['id_categorie'];
+                                    $intitule = utf8_encode($liste_type[$i]['intitule']);
                                     echo "<a href='$pageLink&link=".$lien."'>$intitule</a>"
                                 ?>
                             </li>
@@ -78,7 +78,7 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                             <input id="password_" class="form-control" type="password"  name="password" placeholder="Mot de passe">                                        
                         </div>
-                        <input href="" type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
+                        <input type="submit" class="mrg-left btn btn-primary" name="submit_login" id="submit_login_" value="Connexion"/>
                         <a type="button" class="btn btn-info" href="./index.php?page=inscription">Inscription</a>
                     </div>
                 </form>

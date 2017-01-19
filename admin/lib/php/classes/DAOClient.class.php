@@ -17,7 +17,7 @@ class DAOClient {
             $sql->bindValue(':nom',$nom);
             $sql->bindValue(':prenom',$prenom);
             $sql->bindValue(':pseudo',$pseudo);
-            $sql->bindValue(':mdp',$mdp);
+            $sql->bindValue(':mdp',md5($mdp));
             $sql->bindValue(':email',$email);
             $sql->bindValue(':typeCli',$typeCli);
             $sql->execute();

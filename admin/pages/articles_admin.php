@@ -3,7 +3,7 @@
 <div class="container">
 <?php
 
-    $ObjArticle = new VueArticle($cnx);
+    $ObjArticle = new DAOArticle($cnx);
     $listeArti = $ObjArticle->readAll();
     $nbrArti = count($listeArti);
     

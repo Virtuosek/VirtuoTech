@@ -2,7 +2,7 @@
 <?php 
 /* Client connecté : */
 if(isset($_SESSION['client'])){
-    $ObjCommande= new VueCommande($cnx);
+    $ObjCommande= new DAOCommande($cnx);
     $liste_cm=$ObjCommande->getListeCommande($_SESSION['client']);
     $nbrCm=count($liste_cm);
     if($nbrCm==0){
@@ -25,7 +25,7 @@ if(isset($_SESSION['client'])){
         $etatColor="case_blue";
        for($i=0;$i<$nbrCm;$i++){
             /* On récupère l'id de l'article et l'etat pour afficher les données : */
-            $ObjArticle = new VueArticle($cnx);
+            $ObjArticle = new DAOArticle($cnx);
             $article=$ObjArticle->readArticle2($liste_cm[$i]['id_article']);
             $ObjEtat = new DAOEtat($cnx);
             $etat = $ObjEtat->read($liste_cm[$i]['id_etat']);

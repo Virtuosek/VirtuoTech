@@ -55,7 +55,7 @@ $(document).ready(function(){
 });
 /**/
 
-/* clients_admin.php*/
+/* clients,articles,categories,commandes _admin.php */
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
@@ -96,52 +96,31 @@ $(document).ready(function(){
         }
     });
 });
+/**/
 
-jQuery(document).ready(function(){
+/* inscription.php */
+$(document).ready(function(){
 
-    jQuery("#register").submit(function(){
-
-            if (jQuery("#nom").val() == "") {
-                    alert("Merci de saisir votre nom");
-                    jQuery("#nom").focus();
-                    return false;
+    //pour pouvoir utiliser regex
+    $.validator.addMethod("regex", function (value, element, regexpr) {
+        return regexpr.test(value);
+    }, "Format non valide.");
+    
+    $("#register").validate({
+        rules: {
+            nom: {
+                required: true,
+                regex:/[a-zA-Z]{5}$/
+            },
+            email: "required",
+            prenom: "required",
+            pseudo: "required",
+            password: "required",
+            vpassword: "required",
+            submitHandler: function(form) {
+                form.submit();
             }
-            if (jQuery("#prenom").val() == "") {
-                    alert("Merci de saisir votre prenom");
-                    jQuery("#prenom").focus();
-                    return false;
-            }
-            if (jQuery("#email").val() == "" || valideEmail(jQuery("#email").val()) ) {
-                    alert("Merci de saisir votre adresse email correcte");
-                    jQuery("#email").focus();
-                    return false;
-            }
-            /*if (jQuery("#pseudo").val() == "" || valideEmail(jQuery("#pseudo").val()) ) {
-                    alert("Veuillez saisir votre pseudo");
-                    jQuery("#email").focus();
-                    return false;
-            }*/
-            if (jQuery("#password").val() == "") {
-                    alert("Merci de saisir votre mot de passe");
-                    jQuery("#password").focus();
-                    return false;
-            }
-            if ($('#password').val()!=$('#vpassword').val()) {
-                    alert("Merci de saisir la vérification de votre mot de passe");
-                    jQuery("#vpassword").focus();
-                    return false;
-            }
-
+        }
     });
-
-    function valideEmail(Email){
-            var filtre = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-            var valid = filtre.test(Email);
-
-            if (!valid) {
-                    return true;
-            }
-            return false;
-    }
-	
+    
 });

@@ -2,7 +2,7 @@
 <div class="container">
 
 <?php
-    $ObjCommande = new VueCommande($cnx);
+    $ObjCommande = new DAOCommande($cnx);
     $listeCom = $ObjCommande->readAll();
     $nbrCom = count($listeCom);
     
@@ -97,7 +97,7 @@
                 for($i=0;$i<$nbrCom;$i++){ ?>
                     <tr>
                         <?php /* Les articles, clients et etats sont des FK, on doit récupérer leurs valeurs : */
-                            $ObjArticle = new VueArticle($cnx);
+                            $ObjArticle = new DAOArticle($cnx);
                             $article = $ObjArticle->read($listeCom[$i]['id_article']);
                             $ObjClient = new DAOClient($cnx);
                             $client = $ObjClient->readCli($listeCom[$i]['id_client']);

@@ -4,7 +4,7 @@
 if(isset($_SESSION['client'])){
     
     /* Récupérer la liste des articles ajoutés au panier */
-    $ObjPanier= new VuePanier($cnx);
+    $ObjPanier= new DAOPanier($cnx);
     $liste_g=$ObjPanier->getListePanier($_SESSION['client']);
     $nbrG=count($liste_g);
     for($j=0;$j<999;$j++){
@@ -32,7 +32,7 @@ if(isset($_SESSION['client'])){
             $quantite = 1; //NYI : gestion de quantité
             date_default_timezone_set('CET');
             $date = date("d/m/y");
-            $ObjCommande = new VueCommande($cnx);
+            $ObjCommande = new DAOCommande($cnx);
             $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date, 1); //Etat par défaut : 1 (Demande envoyée)
             if($idCmd==null || $idCmd==0){
                 /* Exception handling : cas où la commannde n'a pas été effectuée : */
@@ -81,7 +81,7 @@ if(isset($_SESSION['client'])){
             $quantite = 1; //NYI : gestion de quantité
             date_default_timezone_set('CET');
             $date = date("d/m/y");
-            $ObjCommande = new VueCommande($cnx);
+            $ObjCommande = new DAOCommande($cnx);
             $idCmd=$ObjCommande->addCommande($idArtiCm, $idClient, $quantite, $date,1);
             $delArt=$ObjPanier->deleteArticleFromCart($idArtiCm, $idClient);
         }
@@ -97,7 +97,6 @@ if(isset($_SESSION['client'])){
         header("Refresh:0");
     }
 
-        
     if($nbrG==0){
         ?>
         <!-- Panier vide :-->
@@ -135,7 +134,7 @@ if(isset($_SESSION['client'])){
         <?php
         for($i=0;$i<$nbrG;$i++){
             /* Pour chaque id_article dans Panier, récupérer ses informations depuis la table Article : */
-            $log = new VueArticle($cnx);
+            $log = new DAOArticle($cnx);
             $idArticle=$liste_g[$i]['id_article'];
             $liste_a = $log->readArticle($idArticle);
             $nbrA = count($liste_a);

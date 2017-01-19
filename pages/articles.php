@@ -4,7 +4,7 @@
     if(isset($_GET['link'])){
         $_SESSION['type_article']=$_GET['link'];
         extract($_GET,EXTR_OVERWRITE);
-        $liste=new VueArticle($cnx);
+        $liste=new DAOArticle($cnx);
         /* Récupération de la liste des articles en envoyant en paramètre l'id de la catégorie */
         $liste_g=$liste->getListeArticle($_SESSION['type_article']);
         $nbrG=count($liste_g);
@@ -15,7 +15,7 @@
     if(isset($_SESSION['client'])){
         for($i=0;$i<999;$i++){
             if(isset($_POST['id'.$i])){
-                $log=new VuePanier($cnx);
+                $log=new DAOPanier($cnx);
                 // Eventually : MAJ de la quantité d'un article ajouté au panier.
                 $idClient = $_SESSION['client'];
                 $idArticle = $i;
@@ -48,14 +48,13 @@ if(isset($nbrG) && $nbrG>0){ ?>
                 <a tabindex="0" data-trigger="focus" data-toggle="popover" data-content="<?php print utf8_encode($liste_g[$i]['description']);?>">Plus d'informations</a>
                 <br/><br/>
                 <form method="post">
-                        <div class="input-group col-lg-1 col-md-2 col-sm-2 col-xs-3">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
-                            <!-- Le bouton a comme nom l'id de l'article auquel il correspond : -->
-                            <?php $id=$liste_g[$i]['id_article'];?>
-                            <input type='submit' id="id<?php print $i; ?>" name="id<?php print $id; ?>" class='form-control btn btn-info btn-sm col-md-4 col-lg-4'
-                               data-toggle='modal' data-target='#myModal' value='Ajouter à mon panier'>
-                        </div>
-                    
+                    <div class="input-group col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-shopping-cart"></i></span>
+                        <!-- Le bouton a comme nom l'id de l'article auquel il correspond : -->
+                        <?php $id=$liste_g[$i]['id_article'];?>
+                        <input type='submit' id="id<?php print $i; ?>" name="id<?php print $id; ?>" class='form-control btn btn-info btn-sm col-md-4 col-lg-4'
+                           data-toggle='modal' data-target='#myModal' value='Ajouter à mon panier'>
+                    </div>
                 </form>
             </div>
             <hr>
@@ -108,6 +107,16 @@ if(isset($nbrG) && $nbrG>0){ ?>
         </div>
 </div>
 <?php  }else{
-    print 'Empty Database';
+    ?>
+    <!-- Base de donnée vide : -->
+    <div class="background">
+        <div class="container">
+            <div class="margin-top"></div>
+            <div class='centrer'>
+                <h3 class="font-bold mrg-top-30">Aucun article n'est disponible pour le moment.<br/><br/>
+            </div>
+        </div>
+    </div>
+    <?php
 }
 ?>

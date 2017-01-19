@@ -9,35 +9,26 @@
    if(isset($_POST['submit_register'])){
         $ObjClient=new DAOClient($cnx);
         $retour=null;
-        /* NYI : Controle de saisie */
-        if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['mdp'])  && !empty($_POST['email'])){
-            
-            /* Le type par défaut de l'utilisateur est 1 : client */
-            $retour=$ObjClient->create_client($_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['mdp'],$_POST['email'],1);
-            if($retour==1){
-                ?>
-                <div class="centrer alert alert-success alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    Inscription effectuée!
-                </div>
-                <?php
-            }
-            else{
-                ?>
-                <div class="centrer alert alert-danger alert-dismissable fade in">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    L'inscription n'a pas été effectuée!
-                </div>
-                <?php
-            }
-        }else{
-            ?>
-            <div class="centrer alert alert-danger alert-dismissable fade in">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Veuillez remplir tous les champs.
-            </div>
-            <?php
-        }
+        $fname = ($_POST['nom']);
+        $lname = ($_POST['prenom']);
+        $username = ($_POST['pseudo']);
+        $pass1 = ($_POST['mdp']);
+        $pass2 = ($_POST['confmdp']);
+        $email = ($_POST['email']);
+        if(!empty($fname) && !empty($lname) && !empty($username) && !empty($pass1) && !empty($pass2)  && !empty($email)){
+            if(!matches("@([A-Za-z]{2,})@",$fname) || !matches("@([A-Za-z]{2,})@",$lname))
+                alert("alert-danger","Le nom et prénom ne doivent contenir que des lettres (au moins 2)");
+            else if(!matches("@(^.{5,}$)@",$pass1) || !matches("@(^.{5,}$)@",$username))
+                alert("alert-danger","Votre pseudo et mot de passe doivent contenir au moins 5 caractères");
+            else if($pass1!=$pass2)
+                alert("alert-danger","Les deux mots de passe sont différents");
+            else
+                /* Le type par défaut de l'utilisateur est 1 : client */
+                $retour=$ObjClient->create_client($lname,$fname,$username,$pass1,$email,1);
+            if($retour==1)
+                alert("alert-success","Inscription effectuée!");
+        }else
+            alert("alert-danger"," Veuillez remplir tous les champs.");
     }
 ?>
 <form action="index.php?page=inscription" method="post" id="register">
@@ -46,7 +37,7 @@
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
             <div class="input-group ">
                 <span class="input-group-addon"><i class="fa fa-user fa"></i></span>
-                <input type="text" class="form-control" name="nom" id="nom"  placeholder="Entrez votre nom"/>
+                <input type="text" class="form-control" name="nom" id="nom"  placeholder="Entrez votre nom"/></label>
             </div>
         </div>
         <div class="pad-bot col-lg-4 col-md-5 col-sm-5">
@@ -104,3 +95,18 @@
 
 </div>
 </div>
+
+<?php 
+    function alert($type,$message){ ?>
+        <span class="margin-center"></span>
+        <div class="centrer alert <?php print $type?> alert-dismissable fade in" id="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?php print $message;?>
+        </div>
+        <?php
+    }
+    
+    function matches($pattern,$subject){
+        return preg_match($pattern,$subject);
+    }
+?>

@@ -1,8 +1,3 @@
-<?php
-    $type=new Type_articleDB($cnx);
-    $liste_type=$type->getType_article();
-    $nbr=count($liste_type);
-?>
 <link href='../admin/lib/css/general_css.css' type='text/css'/>
 
 <nav class="navbar navbar-inverse">
